@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Coach Hub · Aasees Sethi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;700;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --day-bg:#FFFFFF;--day-page:#EEF2EF;--day-ink:#13201A;--day-muted:#5B6B62;--day-soft:#E6FBEE;--day-line:#DCE4DE;
+  --green:#4ADE80;--green-ink:#15803D;--green-deep:#166534;
+  --night-bg:#15122E;--night-page:#0A0918;--night-ink:#F4F1FF;--night-muted:#B4AED6;--night-soft:#2B2456;--night-line:#342E66;
+  --violet:#A78BFA;--violet-ink:#6D28D9;--violet-deep:#1E1147;
+  --sun:#FACC15;
+  --display:"Baloo 2","Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Nunito","Segoe UI",system-ui,-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font-family:var(--body);font-weight:700;color:var(--day-ink);
+  background:linear-gradient(90deg,var(--day-page) 0 50%,var(--night-page) 50% 100%);min-height:100vh}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 60px}
+
+/* hero: half day, half night */
+.hero{position:relative;display:grid;grid-template-columns:1fr 1fr;border-radius:32px;overflow:hidden;box-shadow:0 30px 70px -40px rgba(10,9,24,.6)}
+.hero .day{background:linear-gradient(160deg,#F0FDF4,#FFFFFF 70%);padding:34px 36px 40px;position:relative}
+.hero .night{background:linear-gradient(200deg,#211A4A,#15122E 60%,#1C1238);padding:34px 36px 40px;color:var(--night-ink);position:relative;text-align:right}
+.hero .night::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.6;
+  background-image:radial-gradient(1.5px 1.5px at 12% 20%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 30% 60%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 55% 15%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 72% 45%,#fff 50%,transparent 51%),radial-gradient(1.5px 1.5px at 88% 78%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 45% 85%,#fff 50%,transparent 51%)}
+.orb{position:absolute;top:26px;width:74px;height:74px;border-radius:50%}
+.day .orb{right:30px;background:radial-gradient(circle at 35% 35%,#FEF08A,#FACC15);box-shadow:0 0 0 12px rgba(250,204,21,.18)}
+.night .orb{left:30px;background:radial-gradient(circle at 35% 35%,#FFFBEB,#FDE68A);box-shadow:0 0 30px 6px rgba(253,230,138,.25)}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(40px,6vw,76px);line-height:.95;margin:0;letter-spacing:-.5px}
+.hero .day h1{color:var(--day-ink)}
+.hero .night h1{color:var(--night-ink)}
+.hero .kicker{font-family:var(--display);font-size:18px;margin:0 0 6px}
+.day .kicker{color:var(--green-ink)}
+.night .kicker{color:var(--violet)}
+.hero p.sub{margin:12px 0 0;font-size:18px}
+.day p.sub{color:var(--day-muted)}
+.night p.sub{color:var(--night-muted)}
+.hero .mid{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);background:#fff;color:var(--day-ink);font-family:var(--display);font-weight:800;font-size:20px;border-radius:999px;padding:10px 20px 6px;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);white-space:nowrap;z-index:2}
+.hero .mid b{color:var(--green-ink)}
+.hero .mid i{font-style:normal;color:var(--violet-ink)}
+
+/* next class strip */
+.next{margin:22px 0 8px;display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center}
+.pill{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:8px 18px 6px;font-family:var(--display);font-weight:800;font-size:18px}
+.pill.l1{background:var(--green);color:var(--green-deep);box-shadow:0 4px 0 var(--green-ink)}
+.pill.l3{background:var(--violet);color:var(--violet-deep);box-shadow:0 4px 0 var(--violet-ink)}
+.pill.cd{background:#fff;color:var(--day-ink);box-shadow:0 4px 0 #C9D3CC}
+
+/* lab columns */
+.labs{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:22px;align-items:start}
+.lab{border-radius:28px;padding:26px 26px 22px}
+.lab.l1{background:var(--day-bg);color:var(--day-ink);border:2px solid var(--day-line)}
+.lab.l3{background:var(--night-bg);color:var(--night-ink);border:2px solid var(--night-line)}
+.lab .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.lab h2{font-family:var(--display);font-weight:800;font-size:40px;margin:0;line-height:1}
+.lab .time{font-size:15px}
+.l1 .time{color:var(--day-muted)}
+.l3 .time{color:var(--night-muted)}
+.lab .proj{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 18px}
+.tag{font-size:13px;border-radius:10px;padding:5px 10px}
+.l1 .tag{background:var(--day-soft);color:var(--green-deep)}
+.l3 .tag{background:var(--night-soft);color:#DDD6FE}
+
+.now{border-radius:22px;padding:18px 20px}
+.l1 .now{background:linear-gradient(135deg,#DCFCE7,#F0FDF4);border:2px solid #86EFAC}
+.l3 .now{background:linear-gradient(135deg,#2B2456,#1E1A40);border:2px solid #6D28D9}
+.now .wk{font-family:var(--display);font-size:16px}
+.l1 .now .wk{color:var(--green-ink)}
+.l3 .now .wk{color:var(--violet)}
+.now h3{font-family:var(--display);font-weight:800;font-size:32px;margin:2px 0 4px;line-height:1.05}
+.now p{margin:0 0 14px;font-size:16px}
+.l1 .now p{color:var(--day-muted)}
+.l3 .now p{color:var(--night-muted)}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:var(--display);font-weight:800;font-size:19px;border-radius:14px;padding:9px 16px 6px;transition:transform .08s ease,box-shadow .08s ease}
+.btn:active{transform:translateY(3px)}
+.l1 .btn.main{background:var(--green);color:var(--green-deep);box-shadow:0 5px 0 var(--green-ink)}
+.l3 .btn.main{background:var(--violet);color:var(--violet-deep);box-shadow:0 5px 0 var(--violet-ink)}
+.l1 .btn.alt{background:#fff;color:var(--day-ink);border:2px solid var(--day-line)}
+.l3 .btn.alt{background:#0F0C26;color:var(--night-ink);border:2px solid var(--night-line)}
+.btn:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+
+.weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}
+.w{border-radius:14px;padding:9px 10px 8px;font-size:13px;line-height:1.25;position:relative;min-height:66px}
+.l1 .w{background:#F6F8F7;color:var(--day-muted)}
+.l3 .w{background:#1B1740;color:var(--night-muted)}
+.w b{display:flex;align-items:center;gap:6px;font-family:var(--display);font-size:15px}
+.l1 .w b{color:var(--day-ink)}
+.l3 .w b{color:var(--night-ink)}
+.w i{width:11px;height:11px;border-radius:50%;display:inline-block;flex:none}
+.w.ready{outline:2px solid currentColor;text-decoration:none}
+.w.ready:hover{transform:translateY(-2px)}
+.l1 .w.ready{color:var(--green-ink);background:#ECFDF3}
+.l3 .w.ready{color:var(--violet);background:#221C4E}
+.phase{font-family:var(--display);font-size:15px;margin:16px 0 0}
+.l1 .phase{color:var(--day-muted)}
+.l3 .phase{color:var(--night-muted)}
+
+/* links */
+.links{margin-top:26px;border-radius:28px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr}
+.links .col{padding:22px 24px}
+.links .col.d{background:var(--day-bg);border:2px solid var(--day-line);border-right:0;border-radius:28px 0 0 28px}
+.links .col.n{background:var(--night-bg);color:var(--night-ink);border:2px solid var(--night-line);border-left:0;border-radius:0 28px 28px 0}
+.links h4{font-family:var(--display);font-size:22px;margin:0 0 10px}
+.links ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.links a{display:flex;justify-content:space-between;gap:10px;text-decoration:none;border-radius:12px;padding:9px 12px;font-size:15px}
+.col.d a{background:#F6F8F7}
+.col.n a{background:#1B1740}
+.links a span{font-family:var(--mono);font-size:12.5px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:55%}
+.links a:hover{outline:2px solid currentColor}
+
+.keys{margin:26px auto 0;width:fit-content;max-width:100%;text-align:center;font-size:14px;color:var(--day-muted);background:#fff;border-radius:999px;padding:8px 18px;box-shadow:0 10px 30px -18px rgba(0,0,0,.6)}
+.keys kbd{font-family:var(--mono);background:#fff;color:var(--day-ink);border-radius:6px;padding:2px 7px;margin:0 2px;border:1px solid var(--day-line)}
+
+@media (max-width:860px){
+  body{background:var(--day-page)}
+  .hero,.labs,.links{grid-template-columns:1fr}
+  .hero .night{text-align:left}
+  .hero .mid{position:static;transform:none;margin:0 auto;display:none}
+  .night .orb{left:auto;right:30px}
+  .weeks{grid-template-columns:repeat(2,1fr)}
+  .links .col.d{border-right:2px solid var(--day-line);border-radius:28px 28px 0 0}
+  .links .col.n{border-left:2px solid var(--night-line);border-radius:0 0 28px 28px}
+  .keys{color:var(--day-muted)}
+}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="day">
+      <span class="orb" aria-hidden="true"></span>
+      <p class="kicker">☀️ Sundays 1:30</p>
+      <h1>Coach<br>Hub</h1>
+      <p class="sub">AI Project Lab 1 · the arcade and the club site</p>
+      <p style="height:34px;margin:0"></p>
+    </div>
+    <div class="night">
+      <span class="orb" aria-hidden="true"></span>
+      <p class="kicker">Sundays 3:30 🌙</p>
+      <h1>Aasees<br>Sethi</h1>
+      <p class="sub">AI Project Lab 3 · Poké Arena and physics</p>
+      <p style="height:34px;margin:0"></p>
+    </div>
+    <div class="mid" aria-hidden="true"><b>Lab 1</b> · Caution Tape · <i>Lab 3</i></div>
+  </header>
+
+  <div class="next">
+    <span class="pill cd" id="countdown">📅 Next class: Sunday</span>
+    <span class="pill l1">☀️ Lab 1 · 1:30 to 3:30</span>
+    <span class="pill l3">🌙 Lab 3 · 3:30 to 5:30</span>
+  </div>
+
+  <main class="labs">
+
+    <section class="lab l1" aria-labelledby="l1h">
+      <div class="top"><h2 id="l1h">🎮 Lab 1</h2><span class="time">Newmarket · Sun 1:30 to 3:30</span></div>
+      <div class="proj"><span class="tag">Weeks 1 to 6 · Arcade Cabinet</span><span class="tag">Weeks 7 to 16 · Club Site</span></div>
+      <div class="now">
+        <p class="wk">This week · Week 1</p>
+        <h3>The One-Prompt Game</h3>
+        <p>Crack the secret arcade, set up tools, first game with one prompt. Coach build: Dragon Dash.</p>
+        <div class="btns">
+          <a class="btn main" href="lab1/week1.html">▶ Open slides</a>
+          <a class="btn alt" href="guides/lab1-week1-teacher-guide.pdf" target="_blank" rel="noopener">📄 Teacher guide</a>
+        </div>
+      </div>
+      <p class="phase">All 16 weeks</p>
+      <div class="weeks" id="w1"></div>
+    </section>
+
+    <section class="lab l3" aria-labelledby="l3h">
+      <div class="top"><h2 id="l3h">🔒 Lab 3</h2><span class="time">Newmarket · Sun 3:30 to 5:30</span></div>
+      <div class="proj"><span class="tag">Weeks 1 to 6 · Poké Arena</span><span class="tag">Weeks 7 to 16 · Physics Playground</span></div>
+      <div class="now">
+        <p class="wk">This week · Week 1</p>
+        <h3>Fix the Lock</h3>
+        <p>Build your city, hack it from the console, then hire a bouncer. Coach build: lock Skyline live.</p>
+        <div class="btns">
+          <a class="btn main" href="lab3/week1.html">▶ Open slides</a>
+          <a class="btn alt" href="guides/lab3-week1-teacher-guide.pdf" target="_blank" rel="noopener">📄 Teacher guide</a>
+        </div>
+      </div>
+      <p class="phase">All 16 weeks</p>
+      <div class="weeks" id="w3"></div>
+    </section>
+
+  </main>
+
+  <section class="links" aria-label="Links I open in class">
+    <div class="col d">
+      <h4>☀️ Lab 1 links</h4>
+      <ul>
+        <li><a href="https://demo-arcade.ct839.dev" target="_blank" rel="noopener">🕹️ Demo arcade <span>code: 839</span></a></li>
+        <li><a href="https://guraaseessethi.github.io/my-arcade/" target="_blank" rel="noopener">🐶 Bone Run <span>my-arcade</span></a></li>
+        <li><a href="https://demo-club.ct839.dev" target="_blank" rel="noopener">🏫 Demo club site <span>weeks 7 to 16</span></a></li>
+        <li><a href="https://code.visualstudio.com" target="_blank" rel="noopener">💻 VS Code <span>setup</span></a></li>
+      </ul>
+    </div>
+    <div class="col n">
+      <h4>🌙 Lab 3 links</h4>
+      <ul>
+        <li><a href="https://skyline-fawn.vercel.app" target="_blank" rel="noopener">🏗️ Skyline <span>my city</span></a></li>
+        <li><a href="https://demo-leaderboard.ct839.dev" target="_blank" rel="noopener">🕶️ Demo leaderboard <span>Tamper Test</span></a></li>
+        <li><a href="https://demo-poke.ct839.dev" target="_blank" rel="noopener">⚡ Demo Poké Arena <span>weeks 2 to 6</span></a></li>
+        <li><a href="https://console.firebase.google.com" target="_blank" rel="noopener">🔥 Firebase console <span>rules</span></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <p class="keys">In the slides: <kbd>F</kbd> full screen · <kbd>→</kbd> next · <kbd>S</kbd> timer · <kbd>N</kbd> notes · <a href="https://learn.ct839.com" target="_blank" rel="noopener">CT Learn ↗</a></p>
+</div>
+
+<script>
+(function(){
+  var L1=["The One-Prompt Game","Structure and Style","First Deploy","The Second Game","Fix Week","Ship Day","Kickoff: A Club Site","Mockup Week","Skeleton + Homepage","Content Pages","The First Live Part","The Arcade Comes Back","The Join Page","Polish Week","Review Day","Demo Day"];
+  var L3=["Fix the Lock","Gotta Fetch 'Em All","Server in the Middle","Battle + Playtest","The Server Decides","Ship Day","A Real Engine","The Scene Tree","Physics, Hands-On","Core Gameplay Loop","A Complete Round","Saving to Firebase","Async Multiplayer","Polish Week","Balance Day","Demo Day"];
+  var PAL=["#4ADE80","#F472B6","#38BDF8","#FACC15","#FB7185","#F59E0B","#A78BFA","#2DD4BF","#818CF8","#A3E635","#22D3EE","#FB923C","#6EE7B7","#60A5FA","#E879F9","#FDE68A"];
+  var READY={"1-1":"lab1/week1.html","3-1":"lab3/week1.html"};
+  function fill(id,lab,titles,shift){
+    var el=document.getElementById(id), html="";
+    titles.forEach(function(t,i){
+      var wk=i+1, col=PAL[(i+shift)%16], url=READY[lab+"-"+wk];
+      var inner='<b><i style="background:'+col+'"></i>Week '+wk+'</b>'+t;
+      html+= url ? '<a class="w ready" href="'+url+'">'+inner+'</a>' : '<div class="w">'+inner+'</div>';
+    });
+    el.innerHTML=html;
+  }
+  fill("w1","1",L1,0);
+  fill("w3","3",L3,6);
+
+  // countdown to next Sunday 1:30pm (Toronto)
+  try{
+    var now=new Date(), d=new Date(now), day=d.getDay();
+    var add=(7-day)%7; d.setDate(d.getDate()+add); d.setHours(13,30,0,0);
+    if(d<now){ var end=new Date(d); end.setHours(17,30,0,0); if(now<end){ document.getElementById("countdown").textContent="🔴 Class day! Lab 1 at 1:30, Lab 3 at 3:30"; return; } d.setDate(d.getDate()+7); }
+    var days=Math.floor((d-now)/86400000), hrs=Math.floor(((d-now)%86400000)/3600000);
+    document.getElementById("countdown").textContent="📅 Next class in "+(days?days+"d ":"")+hrs+"h · "+d.toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric"});
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
