@@ -112,6 +112,11 @@ button:focus-visible{outline:4px solid var(--sun);outline-offset:3px}
 #help kbd{background:#EEF2EF;border-radius:6px;padding:2px 8px;font-family:var(--mono);font-size:15px}
 @media (prefers-reduced-motion:reduce){.slide.active,#timesup div{animation:none}.reveal,.t-fill{transition:none}}
 </style>
+<style>
+.quizbox h2{font-size:46px!important;margin-top:6px!important}
+.quizbox .qq{margin-top:9px!important;padding:9px 18px 10px!important}
+.quizbox .qt{margin-bottom:7px!important}
+</style>
 </head>
 <body>
 <div id="viewport">
@@ -553,7 +558,8 @@ Win or lose: ___ to win. ___ and you lose.</div>
     });
   });
   // shrink any slide whose content is taller than the screen
-  function fit(s){ if(!s) return; s.style.zoom=''; var need=s.scrollHeight, have=s.clientHeight; if(need>have+2){ s.style.zoom=Math.max(.7,have/need).toFixed(3); } }
+  function fit(s){ if(!s) return; s.style.zoom=''; var st=document.getElementById('stage').getBoundingClientRect(); if(st.width<50) return; var sc=st.width/1280, maxB=0; s.querySelectorAll('*').forEach(function(e){ if(e.closest('.timer')) return; var q=e.getBoundingClientRect(); if(!q.width||!q.height) return; var b=(q.bottom-st.top)/sc; if(b>maxB) maxB=b; }); var limit=s.querySelector('.timer')?552:648; if(maxB>limit){ s.style.zoom=Math.max(.72,limit/maxB).toFixed(3); } }
+  addEventListener('resize',function(){ requestAnimationFrame(fitActive); });
   function fitActive(){ fit(document.querySelector('.slide.active')); }
   new MutationObserver(function(){ requestAnimationFrame(fitActive); }).observe(document.getElementById('stage'),{subtree:true,attributes:true,attributeFilter:['class']});
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fitActive);

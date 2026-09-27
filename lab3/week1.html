@@ -170,6 +170,13 @@ button:focus-visible{outline:4px solid var(--sun);outline-offset:3px}
   });
 })();
 </script>
+<style>
+.cs{position:relative}
+.slide .cs > .side:first-child{grid-column:1;grid-row:1}
+.slide .cs > .wire{grid-column:2;grid-row:1}
+.slide .cs > .side.srv{grid-column:3;grid-row:1}
+.slide .cs .msg{grid-column:3;grid-row:1;align-self:end;margin:0 16px 14px;font-size:19px;line-height:1.3;z-index:1;pointer-events:none}
+</style>
 </head>
 <body>
 <div id="viewport">
@@ -793,7 +800,8 @@ body{background:radial-gradient(circle at 20% 0%,#1B1640 0,#0A0918 60%)}
 </script>
 <script>
 (function(){
-  function fit(s){ if(!s) return; s.style.zoom=''; var need=s.scrollHeight, have=s.clientHeight; if(need>have+2){ s.style.zoom=Math.max(.7,have/need).toFixed(3); } }
+  function fit(s){ if(!s) return; s.style.zoom=''; var st=document.getElementById('stage').getBoundingClientRect(); if(st.width<50) return; var sc=st.width/1280, maxB=0; s.querySelectorAll('*').forEach(function(e){ if(e.closest('.timer')) return; var q=e.getBoundingClientRect(); if(!q.width||!q.height) return; var b=(q.bottom-st.top)/sc; if(b>maxB) maxB=b; }); var limit=s.querySelector('.timer')?552:648; if(maxB>limit){ s.style.zoom=Math.max(.72,limit/maxB).toFixed(3); } }
+  addEventListener('resize',function(){ requestAnimationFrame(fitActive); });
   function fitActive(){ fit(document.querySelector('.slide.active')); }
   new MutationObserver(function(){ requestAnimationFrame(fitActive); }).observe(document.getElementById('stage'),{subtree:true,attributes:true,attributeFilter:['class']});
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(fitActive);
