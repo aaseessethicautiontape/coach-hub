@@ -87,20 +87,22 @@ a{color:inherit}
 .l3 .btn.main{background:var(--violet);color:var(--violet-deep);box-shadow:0 5px 0 var(--violet-ink)}
 .l1 .btn.alt{background:#fff;color:var(--day-ink);border:2px solid var(--day-line)}
 .l3 .btn.alt{background:#0F0C26;color:var(--night-ink);border:2px solid var(--night-line)}
+.btn.unavailable{opacity:.55;cursor:not-allowed;box-shadow:none}
 .btn:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
 
 .weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:18px}
-.w{border-radius:14px;padding:9px 10px 8px;font-size:13px;line-height:1.25;position:relative;min-height:66px}
+.w{border:0;border-radius:14px;padding:9px 10px 8px;font:inherit;font-size:13px;line-height:1.25;text-align:left;position:relative;min-height:66px;cursor:pointer}
 .l1 .w{background:#F6F8F7;color:var(--day-muted)}
 .l3 .w{background:#1B1740;color:var(--night-muted)}
 .w b{display:flex;align-items:center;gap:6px;font-family:var(--display);font-size:15px}
 .l1 .w b{color:var(--day-ink)}
 .l3 .w b{color:var(--night-ink)}
 .w i{width:11px;height:11px;border-radius:50%;display:inline-block;flex:none}
-.w.ready{outline:2px solid currentColor;text-decoration:none}
-.w.ready:hover{transform:translateY(-2px)}
-.l1 .w.ready{color:var(--green-ink);background:#ECFDF3}
-.l3 .w.ready{color:var(--violet);background:#221C4E}
+.w:hover{transform:translateY(-2px)}
+.w.selected{box-shadow:0 0 0 3px var(--sun);z-index:1}
+.w:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.l1 .w.has-materials{color:var(--green-ink);background:#ECFDF3}
+.l3 .w.has-materials{color:var(--violet);background:#221C4E}
 .phase{font-family:var(--display);font-size:15px;margin:16px 0 0}
 .l1 .phase{color:var(--day-muted)}
 .l3 .phase{color:var(--night-muted)}
@@ -167,14 +169,11 @@ a{color:inherit}
     <section class="lab l1" aria-labelledby="l1h">
       <div class="top"><h2 id="l1h">🎮 Lab 1</h2><span class="time">Newmarket · Sun 1:30 to 3:30</span></div>
       <div class="proj"><span class="tag">Weeks 1 to 6 · Arcade Cabinet</span><span class="tag">Weeks 7 to 16 · Club Site</span></div>
-      <div class="now">
-        <p class="wk">This week · Week 1</p>
-        <h3>The One-Prompt Game</h3>
-        <p>Crack the secret arcade, set up tools, first game with one prompt. Coach build: Dragon Dash.</p>
-        <div class="btns">
-          <a class="btn main" href="lab1/week1.html">▶ Open slides</a>
-          <a class="btn alt" href="guides/lab1-week1-teacher-guide.pdf" target="_blank" rel="noopener">📄 Teacher guide</a>
-        </div>
+      <div class="now" id="panel1">
+        <p class="wk" id="w1Label">Selected week · Week 1</p>
+        <h3 id="w1Title">The One-Prompt Game</h3>
+        <p id="w1Description">Crack the secret arcade, set up tools, first game with one prompt. Coach build: Dragon Dash.</p>
+        <div class="btns" id="w1Actions"></div>
       </div>
       <p class="phase">All 16 weeks</p>
       <div class="weeks" id="w1"></div>
@@ -183,15 +182,11 @@ a{color:inherit}
     <section class="lab l3" aria-labelledby="l3h">
       <div class="top"><h2 id="l3h">🔒 Lab 3</h2><span class="time">Newmarket · Sun 3:30 to 5:30</span></div>
       <div class="proj"><span class="tag">Weeks 1 to 6 · Poké Arena</span><span class="tag">Weeks 7 to 16 · Physics Playground</span></div>
-      <div class="now">
-        <p class="wk">This week · Week 2</p>
-        <h3>Gotta Fetch 'Em All</h3>
-        <p>Fetch Pokémon data from an API and show it in the Poké Arena.</p>
-        <div class="btns">
-          <a class="btn main" href="lab3/week2.html">▶ Open slides</a>
-          <a class="btn alt" href="guides/lab3-week2-teacher-guide.pdf" target="_blank" rel="noopener">📄 Teacher guide</a>
-          <a class="btn alt" href="lab3/week1.html">Week 1 slides</a>
-        </div>
+      <div class="now" id="panel3">
+        <p class="wk" id="w3Label">Selected week · Week 2</p>
+        <h3 id="w3Title">Gotta Fetch 'Em All</h3>
+        <p id="w3Description">Fetch Pokémon data from an API and show it in the Poké Arena.</p>
+        <div class="btns" id="w3Actions"></div>
       </div>
       <p class="phase">All 16 weeks</p>
       <div class="weeks" id="w3"></div>
@@ -228,18 +223,55 @@ a{color:inherit}
   var L1=["The One-Prompt Game","Structure and Style","First Deploy","The Second Game","Fix Week","Ship Day","Kickoff: A Club Site","Mockup Week","Skeleton + Homepage","Content Pages","The First Live Part","The Arcade Comes Back","The Join Page","Polish Week","Review Day","Demo Day"];
   var L3=["Fix the Lock","Gotta Fetch 'Em All","Server in the Middle","Battle + Playtest","The Server Decides","Ship Day","A Real Engine","The Scene Tree","Physics, Hands-On","Core Gameplay Loop","A Complete Round","Saving to Firebase","Async Multiplayer","Polish Week","Balance Day","Demo Day"];
   var PAL=["#4ADE80","#F472B6","#38BDF8","#FACC15","#FB7185","#F59E0B","#A78BFA","#2DD4BF","#818CF8","#A3E635","#22D3EE","#FB923C","#6EE7B7","#60A5FA","#E879F9","#FDE68A"];
-  var READY={"1-1":"lab1/week1.html","3-1":"lab3/week1.html","3-2":"lab3/week2.html"};
-  function fill(id,lab,titles,shift){
-    var el=document.getElementById(id), html="";
-    titles.forEach(function(t,i){
-      var wk=i+1, col=PAL[(i+shift)%16], url=READY[lab+"-"+wk];
-      var inner='<b><i style="background:'+col+'"></i>Week '+wk+'</b>'+t;
-      html+= url ? '<a class="w ready" href="'+url+'">'+inner+'</a>' : '<div class="w">'+inner+'</div>';
-    });
-    el.innerHTML=html;
+  var FILES={
+    "1-1":{slides:"lab1/week1.html",guide:"guides/lab1-week1-teacher-guide.pdf"},
+    "3-1":{slides:"lab3/week1.html",guide:"guides/lab3-week1-teacher-guide.pdf"},
+    "3-2":{slides:"lab3/week2.html",guide:"guides/lab3-week2-teacher-guide.pdf"}
+  };
+  var SUMMARIES={
+    "1-1":"Crack the secret arcade, set up tools, first game with one prompt. Coach build: Dragon Dash.",
+    "3-2":"Fetch Pokémon data from an API and show it in the Poké Arena."
+  };
+  function addAction(container,label,path,main,guide){
+    var item=document.createElement(path?"a":"span");
+    item.className="btn "+(main?"main":"alt")+(path?"":" unavailable");
+    item.textContent=path?label:label.replace(/^(▶|📄)\s*/,"")+" not posted";
+    if(path){ item.href=path; if(guide){ item.target="_blank"; item.rel="noopener"; } }
+    else item.setAttribute("aria-disabled","true");
+    container.appendChild(item);
   }
-  fill("w1","1",L1,0);
-  fill("w3","3",L3,6);
+  function selectWeek(lab,week,titles){
+    var key=lab+"-"+week, files=FILES[key]||{}, panel=document.getElementById("panel"+lab);
+    var project=lab==="1"?(week<=6?"Arcade Cabinet":"Club Site"):(week<=6?"Poké Arena":"Physics Playground");
+    document.getElementById("w"+lab+"Label").textContent="Selected week · Week "+week;
+    document.getElementById("w"+lab+"Title").textContent=titles[week-1];
+    document.getElementById("w"+lab+"Description").textContent=SUMMARIES[key]||project+" · Week "+week;
+    var actions=document.getElementById("w"+lab+"Actions");
+    actions.innerHTML="";
+    addAction(actions,"▶ Open slides",files.slides,true,false);
+    addAction(actions,"📄 Teacher guide",files.guide,false,true);
+    document.getElementById(lab==="1"?"w1":"w3").querySelectorAll(".w").forEach(function(button){
+      var selected=Number(button.dataset.week)===week;
+      button.classList.toggle("selected",selected);
+      button.setAttribute("aria-pressed",String(selected));
+    });
+  }
+  function fill(id,lab,titles,shift,initialWeek){
+    var container=document.getElementById(id);
+    titles.forEach(function(title,index){
+      var week=index+1, key=lab+"-"+week, button=document.createElement("button");
+      button.type="button";
+      button.className="w"+(FILES[key]?" has-materials":"");
+      button.dataset.week=week;
+      button.setAttribute("aria-pressed","false");
+      button.innerHTML='<b><i style="background:'+PAL[(index+shift)%16]+'"></i>Week '+week+'</b>'+title;
+      button.addEventListener("click",function(){selectWeek(lab,week,titles);});
+      container.appendChild(button);
+    });
+    selectWeek(lab,initialWeek,titles);
+  }
+  fill("w1","1",L1,0,1);
+  fill("w3","3",L3,6,2);
 
   // countdown to next Sunday 1:30pm (Toronto)
   try{
