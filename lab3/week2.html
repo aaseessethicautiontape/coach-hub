@@ -20,7 +20,8 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:#2B1A0E;overflow:hidden;font-family:var(--body);color:var(--ink)}
 #viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
-#stage{width:1600px;height:900px;position:relative;transform-origin:center center;background:var(--paper);overflow:hidden;border-radius:6px}
+#stage{width:1600px;height:900px;position:relative;flex:none;transform-origin:center center;background:var(--paper);overflow:hidden;border-radius:6px}
+:fullscreen #stage{border-radius:0}
 .slide{position:absolute;inset:0;padding:96px 90px 80px;display:none;flex-direction:column;
   background:
     radial-gradient(circle at 92% 8%, #FFE4C7 0 130px, transparent 131px),
@@ -31,7 +32,7 @@ html,body{height:100%;background:#2B1A0E;overflow:hidden;font-family:var(--body)
 
 /* frame chrome */
 .tag-l,.tag-r{position:absolute;top:26px;font:700 18px var(--body);color:var(--ink-2);z-index:5}
-.tag-l{left:36px}.tag-r{right:36px}
+.tag-l{left:36px}.tag-r{right:238px}
 .tag-l b{display:inline-block;background:var(--accent);color:#fff;border-radius:999px;padding:4px 14px;margin-right:8px}
 #slideNum{position:absolute;right:34px;bottom:22px;font:700 18px var(--body);color:var(--ink-3);z-index:30}
 #progress{position:absolute;left:36px;right:120px;bottom:24px;display:flex;gap:8px;z-index:30}
@@ -39,9 +40,29 @@ html,body{height:100%;background:#2B1A0E;overflow:hidden;font-family:var(--body)
 #progress .seg span{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);transition:transform .4s}
 #progress .seg em{position:absolute;top:-24px;left:4px;font:800 13px var(--body);font-style:normal;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
 #progress .seg.on em{color:var(--ink)}
-.navbtn{position:absolute;bottom:58px;width:54px;height:54px;border-radius:50%;border:3px solid var(--ink);background:#fff;font:800 24px var(--head);cursor:pointer;z-index:30;box-shadow:0 4px 0 var(--ink);opacity:.25;transition:opacity .2s}
-.navbtn:hover{opacity:1}
-#prevBtn{left:22px}#nextBtn{right:22px}
+.navbtn{position:absolute;top:50%;transform:translateY(-50%);width:76px;height:104px;border-radius:22px;border:3px solid var(--ink);background:rgba(255,255,255,.96);font:800 52px/1 var(--head);cursor:pointer;z-index:35;box-shadow:0 5px 0 var(--ink);opacity:.88;transition:opacity .2s,transform .15s;touch-action:manipulation}
+.navbtn:hover{opacity:1;transform:translateY(-50%) scale(1.04)}
+#prevBtn{left:16px}#nextBtn{right:16px}
+#fullBtn{position:absolute;right:28px;top:24px;z-index:50;min-height:54px;padding:10px 18px;border:3px solid var(--ink);border-radius:14px;background:#fff;color:var(--ink);font:700 19px var(--body);box-shadow:0 4px 0 var(--ink);cursor:pointer;touch-action:manipulation}
+#fullBtn:focus-visible,.navbtn:focus-visible{outline:4px solid var(--accent);outline-offset:4px}
+
+/* Slide 2: quick, legible route map for the classroom display. */
+.map-slide{padding:72px 100px 82px}
+.map-slide .map-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
+.map-slide .map-head h2{font-size:72px;margin:0;line-height:1}
+.map-slide .map-intro{font-size:23px;color:var(--ink-2);font-weight:700;max-width:420px;text-align:right}
+.map-stops{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:18px;margin-top:44px;position:relative}
+.map-stops::before{content:"";position:absolute;left:9%;right:9%;top:80px;height:7px;border-radius:99px;background:linear-gradient(90deg,var(--play),var(--fetch),var(--setup),var(--build),var(--ship));opacity:.5}
+.map-stop{position:relative;z-index:1;min-width:0;min-height:310px;padding:24px 18px 20px;border-width:3px;border-radius:24px;box-shadow:0 7px 0 var(--ink);display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.map-stop .map-icon{width:106px;height:106px;border:4px solid var(--ink);border-radius:30px;background:#fff;display:grid;place-items:center;font-size:62px;box-shadow:0 5px 0 var(--ink)}
+.map-stop h3{font-size:32px;margin-top:4px}
+.map-stop p{font-size:19px;line-height:1.25;min-height:48px}
+.map-stop .chip{margin-top:auto;min-width:108px;font-size:21px;padding:7px 16px}
+.map-finish{margin-top:28px;min-height:112px;padding:18px 28px;border-radius:22px;box-shadow:0 6px 0 var(--ink);display:flex;align-items:center;gap:22px}
+.map-finish .flag{font-size:56px;flex:none}
+.map-finish b{display:block;font:700 25px var(--head);color:var(--accent-d);margin-bottom:2px}
+.map-finish p{font-size:27px;line-height:1.2;font-weight:800}
+@media (max-width:1100px){.map-slide{padding:72px 78px 82px}.map-slide .map-head h2{font-size:60px}.map-slide .map-intro{font-size:19px}.map-stops{gap:12px}.map-stop{padding:18px 12px;min-height:285px}.map-stop .map-icon{width:88px;height:88px;font-size:52px}.map-stop h3{font-size:26px}.map-stop p{font-size:17px}}
 
 /* type */
 h1{font:700 92px/1 var(--head);letter-spacing:-.01em}
@@ -210,6 +231,59 @@ kbd{font:700 .85em var(--mono);background:#fff;border:2px solid var(--ink);borde
 .lane .runner img{width:96px;height:96px;image-rendering:pixelated}
 .lane .finish{position:absolute;right:0;top:0;bottom:0;width:12px;background:repeating-linear-gradient(0deg,var(--ink) 0 12px,#fff 12px 24px)}
 .lane .lbl{position:absolute;left:110px;top:8px;font:700 20px var(--body);color:var(--ink-2)}
+.speed-slide{padding-top:78px}
+.speed-slide h2{font-size:58px;margin-bottom:8px}
+.speed-intro{font-size:21px;color:var(--ink-2);margin-bottom:18px}
+.speed-controls{display:grid;grid-template-columns:1.1fr 1.3fr .95fr;gap:16px;align-items:stretch}
+.speed-control-card{padding:16px 20px;border-radius:18px;box-shadow:0 4px 0 var(--line);min-height:130px}
+.speed-control-card h3{font-size:23px;margin-bottom:10px}
+.speed-pair{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.speed-pair select{font-size:18px!important;min-height:48px}
+.speed-limits{display:grid;gap:12px}
+.speed-limits .sliderrow{font-size:18px;gap:12px}
+.speed-limits .sliderrow span{width:142px!important}
+.speed-limits .sliderrow b{width:64px!important;font-size:20px}
+.speed-limits input[type=range]{min-width:80px}
+.speed-toggle{display:flex;align-items:center;gap:10px;margin-top:12px;font-size:17px}
+.speed-toggle input{width:24px;height:24px;accent-color:var(--accent)}
+.speed-race{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:8px;text-align:center}
+.speed-race .btn{font-size:25px;min-height:58px;width:100%}
+#mpStatus{font:700 17px/1.3 var(--body);color:var(--ink-2);min-height:24px}
+.speed-track{margin-top:18px;padding:14px 18px 16px;border:3px solid var(--ink);border-radius:22px;background:#fff;box-shadow:0 6px 0 var(--ink)}
+.race-lane{display:grid;grid-template-columns:210px minmax(0,1fr);align-items:center;gap:16px;min-height:130px}
+.race-lane+.race-lane{border-top:2px dashed #E7D8C5}
+.race-name{display:grid;gap:5px;min-width:0}
+.race-name strong{font:700 22px var(--head);color:var(--ink);overflow-wrap:anywhere}
+.race-name span{font:700 16px var(--body);color:var(--ink-2)}
+.lane-track{position:relative;height:108px;border-radius:16px;background:linear-gradient(90deg,#F4FFF6,#fff);overflow:hidden}
+.lane-track .runner{position:absolute;left:0;top:6px;width:96px;height:96px;display:flex;align-items:center;justify-content:center}
+.lane-track .runner img{width:90px!important;height:90px!important;image-rendering:pixelated}
+.lane-track .finish{position:absolute;right:0;top:0;bottom:0;width:16px;background:repeating-linear-gradient(0deg,var(--ink) 0 12px,#fff 12px 24px)}
+.speed-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:12px;font-size:19px;color:var(--ink-2)}
+.speed-foot b{color:var(--ink)}
+.trail-slide{padding-top:76px}
+.trail-head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:10px 18px;margin-bottom:8px}
+.trail-head .mission{grid-column:1;grid-row:1;white-space:nowrap}
+.trail-head .trail-instructions{grid-column:2;grid-row:1;font-size:20px;line-height:1.3}
+.trail-head .bubbles{grid-column:1 / -1;gap:8px;justify-content:center}
+.trail-head .bubble{font-size:20px;padding:9px 15px;min-height:48px;white-space:nowrap}
+.trail-head .bubble.picked{background:#DBEAFE;color:var(--ink);outline:3px solid #2563EB;transform:none}
+.trail-head .bubble.correct{background:#DCFCE7;border-color:var(--good);color:#14532D}
+.trail-head .bubble.incorrect{background:#FEE2E2;border-color:var(--bad);color:#7F1D1D}
+.trail-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:18px;min-height:0;flex:1}
+.trail-side{display:flex;flex-direction:column;gap:12px}
+.trail-side .mine{padding:20px 22px}
+.trail-side #ptPow{font-size:74px!important}
+.trail-side .btn{min-height:58px}
+.trail-side .card{padding:16px 18px}
+.pt-field{min-height:0}
+.pt-mon{min-width:124px;min-height:140px;touch-action:manipulation;user-select:none}
+.pt-mon:focus-visible{outline:4px solid var(--gold);outline-offset:4px;border-radius:16px}
+.pt-mon .pw{font-size:26px}
+.pt-mon img{width:116px!important;height:116px!important}
+.pt-mon.me img{width:132px!important;height:132px!important}
+.pt-msg{max-width:80%;font-size:48px;line-height:1.1;text-align:center}
+#ptGuessStatus{min-height:24px;font-size:16px;font-weight:800;color:var(--ink-2)}
 .statbar{display:flex;align-items:center;gap:12px;font:700 22px var(--body)}
 .statbar .k{width:150px;white-space:nowrap}
 .statbar .bar{flex:1;height:22px;border-radius:999px;background:#F1E4D3;overflow:hidden}
@@ -312,17 +386,19 @@ textarea.prd{width:100%;font:600 20px/1.4 var(--body);border:3px solid var(--ink
 </section>
 
 <!-- 2 MAP -->
-<section class="slide" data-sec="play">
-  <div class="kicker">Today's map</div>
-  <h2>5 stops. 1 finish line.</h2>
-  <div class="row" style="gap:20px;margin-top:10px">
-    <div class="card grow" style="border-color:var(--ink);background:#ECFDF3"><div class="emoji-xl" style="font-size:70px">🎮</div><h3>Play</h3><p class="small">Play, catch, try to cheat</p><p class="chip">3:30</p></div>
-    <div class="card grow" style="background:#EAF7FE"><div class="emoji-xl" style="font-size:70px">📡</div><h3>Fetch</h3><p class="small">Steal real Pokémon data</p><p class="chip">4:05</p></div>
-    <div class="card grow" style="background:#FEF9E1"><div class="emoji-xl" style="font-size:70px">🛠️</div><h3>Setup</h3><p class="small">Install the real tools</p><p class="chip">4:30</p></div>
-    <div class="card grow" style="background:#FDEEF6"><div class="emoji-xl" style="font-size:70px">🧱</div><h3>Build</h3><p class="small">Plan it, then build it</p><p class="chip">4:58</p></div>
-    <div class="card grow" style="background:#F2EEFE"><div class="emoji-xl" style="font-size:70px">🚀</div><h3>Ship</h3><p class="small">Push it to GitHub</p><p class="chip">5:20</p></div>
+<section class="slide map-slide" data-sec="play">
+  <div class="map-head">
+    <div><div class="kicker">Today's map <span class="pill">3:30–5:30</span></div><h2>5 stops. 1 finish line.</h2></div>
+    <p class="map-intro">Build your Pokémon game in five clear steps. Tap the arrows to move through the lesson.</p>
   </div>
-  <div class="card orange" style="margin-top:34px;display:flex;align-items:center;gap:20px"><span style="font-size:54px">🏁</span><div class="big">Finish line: your GitHub link goes up on the wall before you leave.</div></div>
+  <div class="map-stops">
+    <div class="card map-stop" style="background:#ECFDF3"><div class="map-icon">🎮</div><h3>Play</h3><p class="small">Play, catch, try to cheat</p><p class="chip">3:30</p></div>
+    <div class="card map-stop" style="background:#EAF7FE"><div class="map-icon">📡</div><h3>Fetch</h3><p class="small">Fetch real Pokémon data</p><p class="chip">4:05</p></div>
+    <div class="card map-stop" style="background:#FEF9E1"><div class="map-icon">🛠️</div><h3>Setup</h3><p class="small">Install the real tools</p><p class="chip">4:30</p></div>
+    <div class="card map-stop" style="background:#FDEEF6"><div class="map-icon">🧱</div><h3>Build</h3><p class="small">Plan it, then build it</p><p class="chip">4:58</p></div>
+    <div class="card map-stop" style="background:#F2EEFE"><div class="map-icon">🚀</div><h3>Ship</h3><p class="small">Push it to GitHub</p><p class="chip">5:20</p></div>
+  </div>
+  <div class="card orange map-finish"><span class="flag">🏁</span><div><b>FINISH LINE</b><p>Your GitHub link goes up on the wall before you leave.</p></div></div>
 </section>
 
 <!-- 3 SETUP CHECK -->
@@ -499,26 +575,31 @@ textarea.prd{width:100%;font:600 20px/1.4 var(--body);border:3px solid var(--ink
 </section>
 
 <!-- 13 STAT MAPPER -->
-<section class="slide" data-sec="fetch" data-init="mapper">
+<section class="slide speed-slide" data-sec="fetch" data-init="mapper">
   <div class="kicker">From JSON to game numbers</div>
-  <h2 style="font-size:52px;margin-bottom:12px">Why does the demo put limits on speed? 🤔</h2>
-  <div class="row" style="align-items:center;gap:14px">
-    <select id="mpA" class="btn white sm"></select><span class="mid">vs</span><select id="mpB" class="btn white sm"></select>
-    <label class="toggle" style="margin-left:16px"><input type="checkbox" id="mpCap" checked> 🧢 Limits ON</label>
-    <button class="btn" id="mpGo">🏁 Race!</button>
-  </div>
-  <div class="row" style="margin-top:14px;gap:30px">
-    <div class="col grow">
-      <div class="sliderrow"><span style="width:170px">Slowest allowed</span><input type="range" id="mpMin" min="20" max="200" value="90"><b id="mpMinV" style="width:60px">90</b></div>
-      <div class="sliderrow"><span style="width:170px">Fastest allowed</span><input type="range" id="mpMax" min="100" max="400" value="200"><b id="mpMaxV" style="width:60px">200</b></div>
+  <h2>Speed stats need game limits. 🏁</h2>
+  <p class="speed-intro">A Pokémon's raw speed stat becomes pixels per second. Change the rules, then race again.</p>
+  <div class="speed-controls">
+    <div class="card speed-control-card">
+      <h3>Choose racers</h3>
+      <div class="speed-pair"><select id="mpA" class="btn white sm" aria-label="First Pokémon"></select><b>VS</b><select id="mpB" class="btn white sm" aria-label="Second Pokémon"></select></div>
+      <label class="speed-toggle"><input type="checkbox" id="mpCap" checked> 🧢 Apply speed limits</label>
     </div>
-    <div class="card soft" style="width:520px;padding:12px 18px"><div class="small" id="mpMath"></div></div>
+    <div class="card speed-control-card speed-limits">
+      <h3>Set the allowed speed range</h3>
+      <div class="sliderrow"><span>Slowest</span><input type="range" id="mpMin" min="20" max="200" value="90" aria-label="Slowest allowed speed"><b id="mpMinV">90</b><small>px/s</small></div>
+      <div class="sliderrow"><span>Fastest</span><input type="range" id="mpMax" min="100" max="400" value="200" aria-label="Fastest allowed speed"><b id="mpMaxV">200</b><small>px/s</small></div>
+    </div>
+    <div class="card speed-control-card speed-race">
+      <button class="btn" id="mpGo">🏁 Start race</button>
+      <div id="mpStatus" aria-live="polite">Pick racers and start.</div>
+    </div>
   </div>
-  <div class="card" style="margin-top:16px;padding:0;overflow:hidden">
-    <div class="lane"><div class="runner" id="mpRA"></div><div class="lbl" id="mpLA"></div><div class="finish"></div></div>
-    <div class="lane"><div class="runner" id="mpRB"></div><div class="lbl" id="mpLB"></div><div class="finish"></div></div>
+  <div class="speed-track">
+    <div class="race-lane"><div class="race-name"><strong id="mpLA">Electrode</strong><span id="mpSpeedA">200 px/s</span></div><div class="lane-track" id="mpTrackA"><div class="runner" id="mpRA"></div><div class="finish" aria-hidden="true"></div></div></div>
+    <div class="race-lane"><div class="race-name"><strong id="mpLB">Slowpoke</strong><span id="mpSpeedB">90 px/s</span></div><div class="lane-track" id="mpTrackB"><div class="runner" id="mpRB"></div><div class="finish" aria-hidden="true"></div></div></div>
   </div>
-  <div class="mid" style="margin-top:14px">Turn limits OFF and race again. Is that a fair game?</div>
+  <div class="speed-foot"><span id="mpMath"></span><b>Turn limits off. Race again. Is that fair?</b></div>
 </section>
 
 <!-- 14 QUIZ 1 -->
@@ -681,18 +762,20 @@ npm install</div>
 </section>
 
 <!-- 27 POWER TRAIL PUZZLE -->
-<section class="slide" data-sec="build" data-init="trail" style="padding-top:78px">
-  <div class="row" style="align-items:center;gap:16px"><div class="mission">⚔️ Power Trail · play and check</div>
-    <div class="small grow">Which one should I fight first?</div>
-    <div class="bubbles" id="ptGuess" style="gap:10px"></div>
+<section class="slide trail-slide" data-sec="build" data-init="trail">
+  <div class="trail-head">
+    <div class="mission">⚔️ Power Trail</div>
+    <div class="trail-instructions">Predict a safe first catch, then tap Pokémon with less power than yours.</div>
+    <div class="bubbles" id="ptGuess" aria-label="Choose your prediction"></div>
   </div>
-  <div class="row grow" style="margin-top:14px;gap:20px;min-height:0">
-    <div class="pt-field grow" id="ptField"><div class="pt-msg" id="ptMsg"></div></div>
-    <div class="col" style="width:330px">
-      <div class="mine"><div class="sticker">Aasees's game</div><div class="small" style="margin-top:6px">My power</div><div class="bignum" id="ptPow" style="font-size:84px">251</div><div class="small" id="ptLog"></div></div>
-      <button class="btn white" id="ptReset">↺ Restart</button>
-      <div class="card soft small">❓ Where did <b>251</b> come from?</div>
-    </div>
+  <div id="ptGuessStatus" aria-live="polite">Which Pokémon has less power than Pidgey?</div>
+  <div class="trail-layout">
+    <div class="pt-field" id="ptField"><div class="pt-msg" id="ptMsg" role="status" aria-live="polite"></div></div>
+    <aside class="trail-side">
+      <div class="mine"><div class="sticker">Aasees's game</div><div class="small" style="margin-top:6px">YOUR POWER · PIDGEY</div><div class="bignum" id="ptPow">251</div><div class="small" id="ptLog"></div></div>
+      <button class="btn white" id="ptReset">↺ Restart trail</button>
+      <div class="card soft small"><b>Power</b> = all 6 base stats added together.</div>
+    </aside>
   </div>
 </section>
 
@@ -823,6 +906,7 @@ npm install</div>
 <div id="slideNum"></div>
 <button class="navbtn" id="prevBtn" aria-label="Previous">‹</button>
 <button class="navbtn" id="nextBtn" aria-label="Next">›</button>
+<button id="fullBtn" type="button" aria-label="Enter full screen">⛶ Full screen</button>
 
 <div id="score"><h4>🏆</h4><div id="scRows"></div><button id="scReset" style="border:0;background:none;cursor:pointer;font-size:18px" title="Reset scores">↺</button></div>
 
@@ -957,6 +1041,20 @@ function go(i) {
 }
 $('#prevBtn').onclick = () => go(cur - 1);
 $('#nextBtn').onclick = () => go(cur + 1);
+const fullBtn = $('#fullBtn');
+function syncFullscreen() { const on = !!document.fullscreenElement; fullBtn.textContent = on ? '⛶ Exit full screen' : '⛶ Full screen'; fullBtn.setAttribute('aria-label', on ? 'Exit full screen' : 'Enter full screen'); }
+async function enterFullscreen() { try { if (!document.fullscreenElement) await document.documentElement.requestFullscreen(); try { await screen.orientation?.lock?.('landscape'); } catch (_) {} fit(); syncFullscreen(); return !!document.fullscreenElement; } catch (_) { return false; } }
+fullBtn.onclick = async () => { if (document.fullscreenElement) { try { await document.exitFullscreen(); } catch (_) {} } else if (!await enterFullscreen()) { fullBtn.textContent = 'Press F11 for full screen'; } };
+document.addEventListener('fullscreenchange', syncFullscreen);
+addEventListener('orientationchange', fit);
+// Swipe left/right anywhere on the slide canvas for touch displays.
+let touchStart = null;
+$('#viewport').addEventListener('touchstart', e => { if (e.touches.length === 1) touchStart = [e.touches[0].clientX, e.touches[0].clientY]; }, { passive: true });
+$('#viewport').addEventListener('touchend', e => {
+  if (!touchStart || !e.changedTouches.length) return;
+  const dx = e.changedTouches[0].clientX - touchStart[0], dy = e.changedTouches[0].clientY - touchStart[1]; touchStart = null;
+  if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.25) go(cur + (dx < 0 ? 1 : -1));
+}, { passive: true });
 
 /* ---------------- keys ---------------- */
 const typing = () => { const a = document.activeElement; return a && (a.tagName === 'INPUT' || a.tagName === 'TEXTAREA' || a.tagName === 'SELECT'); };
@@ -967,7 +1065,7 @@ addEventListener('keydown', e => {
   if (k === 'ArrowRight' || k === 'PageDown' || k === ' ') { e.preventDefault(); go(cur + 1); }
   else if (k === 'ArrowLeft' || k === 'PageUp') { e.preventDefault(); go(cur - 1); }
   else if (k === 'Home') go(0); else if (k === 'End') go(slides.length - 1);
-  else if (k === 'f' || k === 'F') { document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen?.(); }
+  else if (k === 'f' || k === 'F') { document.fullscreenElement ? document.exitFullscreen() : enterFullscreen(); }
   else if (k === 's' || k === 'S') $('#score').classList.toggle('show');
   else if (k === 't' || k === 'T') $('#timerMenu').classList.toggle('show');
   else if (k === 'h' || k === 'H' || k === '?') $('#help').classList.toggle('show');
@@ -1220,32 +1318,50 @@ const INIT = {
     const A = $('#mpA', s), B = $('#mpB', s);
     LIST.forEach(id => { A.append(el('option', { value: id }, cap(BACKUP[id][0]))); B.append(el('option', { value: id }, cap(BACKUP[id][0]))); });
     A.value = 101; B.value = 79;
-    let pa, pb, raceRaf = 0, ready = null;
+    let pa, pb, raceRaf = 0, ready = Promise.resolve();
     const mapped = (p) => { const raw = stat(p, 'speed') * 2.5; if (!$('#mpCap', s).checked) return raw; return Math.max(+$('#mpMin', s).value, Math.min(+$('#mpMax', s).value, raw)); };
+    const stopRace = () => { cancelAnimationFrame(raceRaf); raceRaf = 0; };
     const math = () => {
       if (!pa || !pb) return; $('#mpMinV', s).textContent = $('#mpMin', s).value; $('#mpMaxV', s).textContent = $('#mpMax', s).value;
-      const t = p => `${cap(p.name)}: speed ${stat(p, 'speed')} × 2.5 = ${stat(p, 'speed') * 2.5} ➜ <b>${Math.round(mapped(p))} px/s</b>`;
-      $('#mpMath', s).innerHTML = t(pa) + '<br>' + t(pb) + ($('#mpCap', s).checked ? '' : '<br><b style="color:var(--bad)">No limits!</b>');
-      $('#mpLA', s).textContent = `${cap(pa.name)} · ${Math.round(mapped(pa))} px/s`; $('#mpLB', s).textContent = `${cap(pb.name)} · ${Math.round(mapped(pb))} px/s`;
+      const speedA = Math.round(mapped(pa)), speedB = Math.round(mapped(pb));
+      $('#mpLA', s).textContent = cap(pa.name); $('#mpLB', s).textContent = cap(pb.name);
+      $('#mpSpeedA', s).textContent = `Speed stat ${stat(pa, 'speed')} → ${speedA} px/s`;
+      $('#mpSpeedB', s).textContent = `Speed stat ${stat(pb, 'speed')} → ${speedB} px/s`;
+      const raw = p => Number((stat(p, 'speed') * 2.5).toFixed(1));
+      $('#mpMath', s).innerHTML = `Raw speed = stat × 2.5 · <b>${cap(pa.name)} ${raw(pa)} px/s</b> · <b>${cap(pb.name)} ${raw(pb)} px/s</b>${$('#mpCap', s).checked ? '' : ' · <strong style="color:var(--bad)">Limits off</strong>'}`;
     };
     const load = async () => {
-      cancelAnimationFrame(raceRaf);
+      stopRace();
       pa = await getLocal(A.value); pb = await getLocal(B.value);
-      [['#mpRA', pa], ['#mpRB', pb]].forEach(([q, p]) => { const r = $(q, s); r.innerHTML = ''; r.style.left = '0px'; r.append(spriteEl(p, 96)); });
+      [['#mpRA', pa], ['#mpRB', pb]].forEach(([q, p]) => { const r = $(q, s); r.innerHTML = ''; r.style.left = '0px'; r.append(spriteEl(p, 90)); });
+      $('#mpStatus', s).textContent = 'Ready when you are. Change the limits and compare races.';
       math();
     };
     const reload = () => (ready = load());
-    [A, B].forEach(x => { x.onchange = reload; x.addEventListener('keydown', e => e.stopPropagation()); });
-    ['#mpMin', '#mpMax', '#mpCap'].forEach(q => $(q, s).addEventListener('input', math));
+    [A, B].forEach(x => { x.onchange = () => { if (A.value === B.value) B.value = LIST.find(id => String(id) !== A.value); reload(); }; x.addEventListener('keydown', e => e.stopPropagation()); });
+    const minInput = $('#mpMin', s), maxInput = $('#mpMax', s);
+    minInput.addEventListener('input', () => { if (+minInput.value > +maxInput.value) maxInput.value = minInput.value; maxInput.min = minInput.value; stopRace(); math(); $('#mpStatus', s).textContent = 'Limits changed. Start the race to compare.'; });
+    maxInput.addEventListener('input', () => { if (+maxInput.value < +minInput.value) minInput.value = maxInput.value; minInput.max = maxInput.value; stopRace(); math(); $('#mpStatus', s).textContent = 'Limits changed. Start the race to compare.'; });
+    $('#mpCap', s).addEventListener('change', () => { stopRace(); math(); $('#mpStatus', s).textContent = 'Limits changed. Start the race to compare.'; });
     $('#mpGo', s).onclick = async () => {
-      await ready; if (!pa || !pb) return;
-      cancelAnimationFrame(raceRaf); $('#mpRA', s).style.left = $('#mpRB', s).style.left = '0px'; const W = 1420 - 110, ra = $('#mpRA', s), rb = $('#mpRB', s), va = mapped(pa), vb = mapped(pb); let t0 = performance.now(); let doneA = 0, doneB = 0;
+      try { await ready; } catch (_) { $('#mpStatus', s).textContent = 'Could not load the racers. Try again.'; return; }
+      if (!pa || !pb) return;
+      stopRace(); const ra = $('#mpRA', s), rb = $('#mpRB', s), trackA = $('#mpTrackA', s), trackB = $('#mpTrackB', s), va = mapped(pa), vb = mapped(pb);
+      ra.style.left = rb.style.left = '0px';
+      const distanceA = Math.max(0, trackA.clientWidth - ra.offsetWidth - $('.finish', trackA).offsetWidth - 8);
+      const distanceB = Math.max(0, trackB.clientWidth - rb.offsetWidth - $('.finish', trackB).offsetWidth - 8);
+      let t0 = performance.now(), doneA = null, doneB = null; $('#mpStatus', s).textContent = 'Racing…'; $('#mpGo', s).textContent = '↻ Race again';
       const step = now => {
-        const t = (now - t0) / 1000; const xa = Math.min(W, va * t), xb = Math.min(W, vb * t);
+        const t = (now - t0) / 1000; const xa = Math.min(distanceA, va * t), xb = Math.min(distanceB, vb * t);
         ra.style.left = xa + 'px'; rb.style.left = xb + 'px';
-        if (xa >= W && !doneA) { doneA = t; $('#mpLA', s).textContent += ` 🏁 ${t.toFixed(1)}s`; }
-        if (xb >= W && !doneB) { doneB = t; $('#mpLB', s).textContent += ` 🏁 ${t.toFixed(1)}s`; }
-        if (!(doneA && doneB) && t < 40) raceRaf = requestAnimationFrame(step);
+        if (xa >= distanceA && doneA === null) doneA = t;
+        if (xb >= distanceB && doneB === null) doneB = t;
+        if (doneA !== null && doneB !== null) {
+          const winner = doneA < doneB ? pa : doneB < doneA ? pb : null;
+          $('#mpStatus', s).textContent = winner ? `${cap(winner.name)} wins! ${Math.min(doneA, doneB).toFixed(1)} seconds.` : 'It is a tie!';
+          beep(winner ? 880 : 600, .16); return;
+        }
+        raceRaf = requestAnimationFrame(step);
       };
       math(); t0 = performance.now(); raceRaf = requestAnimationFrame(step);
     };
@@ -1344,39 +1460,48 @@ const INIT = {
   },
   async trail(s) {
     const field = $('#ptField', s), msg = $('#ptMsg', s);
-    const ids = [10, 13, 19, 21]; let me, wild = [], pw = 0, busy = false;
+    const resetBtn = $('#ptReset', s);
+    const ids = [10, 13, 19, 21]; let me, wild = [], pw = 0, busy = false, gameOver = false;
     const pos = [[40, 30], [290, 90], [540, 20], [790, 80]];
     const load = async () => { me = await getLocal(16).catch(() => backupObj(16)); wild = []; for (const id of ids) wild.push(await getLocal(id).catch(() => backupObj(id))); };
     await load();
     const guess = $('#ptGuess', s);
-    wild.forEach((w, j) => guess.append(el('button', { class: 'bubble', style: 'font-size:20px;padding:8px 16px', onclick: e => { $$('.bubble', guess).forEach(b => b.classList.remove('picked')); e.currentTarget.classList.add('picked'); beep(660, .08); } }, `${cap(w.name)} ${power(w)}`)));
+    wild.forEach(w => guess.append(el('button', { class: 'bubble', type: 'button', 'aria-pressed': 'false', onclick: e => {
+      const button = e.currentTarget, correct = power(w) < power(me);
+      $$('.bubble', guess).forEach(b => { b.classList.remove('picked', 'correct', 'incorrect'); b.setAttribute('aria-pressed', 'false'); });
+      button.classList.add('picked', correct ? 'correct' : 'incorrect'); button.setAttribute('aria-pressed', 'true');
+      $('#ptGuessStatus', s).textContent = correct ? `Good pick: ${cap(w.name)} has less power than Pidgey. Try catching it!` : `${cap(w.name)} is stronger than Pidgey. Choose a lower-power Pokémon.`;
+      beep(correct ? 880 : 240, correct ? .1 : .16);
+    } }, `${cap(w.name)} · ${power(w)}`)));
     const reset = () => {
-      field.querySelectorAll('.pt-mon').forEach(n => n.remove()); msg.classList.remove('show'); busy = false;
+      field.querySelectorAll('.pt-mon').forEach(n => n.remove()); msg.classList.remove('show'); busy = false; gameOver = false;
+      $$('.bubble', guess).forEach(b => { b.classList.remove('picked', 'correct', 'incorrect'); b.setAttribute('aria-pressed', 'false'); });
+      $('#ptGuessStatus', s).textContent = 'Which Pokémon has less power than Pidgey?'; resetBtn.textContent = '↺ Restart trail'; resetBtn.disabled = false;
       pw = power(me); $('#ptPow', s).textContent = pw; $('#ptLog', s).textContent = `Pidgey: ${me.stats.map(x => x.base_stat).join(' + ')} = ${pw}`;
       const meEl = el('div', { class: 'pt-mon me', style: 'left:calc(50% - 80px);bottom:20px' }, el('div', { class: 'pw', id: 'ptMe' }, String(pw)), spriteEl(me, 160));
       field.append(meEl);
       wild.forEach((w, j) => {
-        const n = el('div', { class: 'pt-mon', style: `left:${pos[j][0]}px;top:${pos[j][1]}px` }, el('div', { class: 'pw' }, String(power(w))), spriteEl(w, 150), el('div', { class: 'small', style: 'font-weight:800;color:var(--ink);margin-top:-14px' }, cap(w.name)));
+        const n = el('div', { class: 'pt-mon', role: 'button', tabindex: '0', 'aria-label': `${cap(w.name)}, power ${power(w)}. Tap to try to catch`, style: `left:${pos[j][0]}px;top:${pos[j][1]}px` }, el('div', { class: 'pw' }, String(power(w))), spriteEl(w, 116), el('div', { class: 'small', style: 'font-weight:800;color:var(--ink);margin-top:-10px' }, cap(w.name)));
         n.onclick = async () => {
-          if (busy || n.classList.contains('gone')) return; busy = true;
+          if (busy || gameOver || n.classList.contains('gone')) return; busy = true; resetBtn.disabled = true;
           const wp = power(w);
           if (wp < pw) {
             n.classList.add('gone'); beep(880, .1); beep(1175, .15, .1);
             const from = pw; pw += wp; countUp($('#ptMe'), pw, from); countUp($('#ptPow', s), pw, from);
             $('#ptLog', s).textContent = `${from} + ${wp} (${cap(w.name)}) = ${pw}`;
-            await sleep(600); busy = false;
-            if ($$('.pt-mon:not(.me):not(.gone)', field).length === 0) { msg.textContent = '🏆 Trail clear!'; msg.classList.add('show'); confetti(); }
+            await sleep(600); busy = false; resetBtn.disabled = false;
+            if ($$('.pt-mon:not(.me):not(.gone)', field).length === 0) { gameOver = true; msg.textContent = '🏆 Trail clear!'; msg.classList.add('show'); resetBtn.textContent = '↺ Play again'; $('#ptGuessStatus', s).textContent = 'You caught every Pokémon on the trail!'; confetti(); }
           } else {
-            meEl.classList.add('shake'); beep(200, .4);
+            gameOver = true; meEl.classList.add('shake'); beep(200, .4);
             $('#ptLog', s).textContent = `${wp} is bigger than ${pw}. 💀`;
-            msg.textContent = 'You fainted! 💫'; msg.classList.add('show');
-            await sleep(1800); reset();
+            msg.textContent = 'You fainted! 💫'; msg.classList.add('show'); busy = false; resetBtn.disabled = false; resetBtn.textContent = '↺ Try again'; $('#ptGuessStatus', s).textContent = 'That Pokémon had more power. Restart and try another path.';
           }
         };
+        n.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); n.click(); } };
         field.append(n);
       });
     };
-    $('#ptReset', s).onclick = reset; reset();
+    resetBtn.onclick = reset; reset();
   },
   git(s) {
     const gv = $('#gv', s); let commits = 0, pushed = 0;
