@@ -748,7 +748,7 @@ $$('.flip').forEach(function(f){f.onclick=function(){f.classList.toggle('f');ton
 
 /* code hunt */
 var HC=['<!DOCTYPE html>','<html>','<head>','  <title>Star Catcher</title>','  <style>','    body { background: #0b1026; }','    h1 { color: orange; font-size: 48px; }','    #score { color: white; }','  </style>','</head>','<body>','  <h1>Star Catcher</h1>','  <div id="score">Score: 0</div>','  <canvas id="game"></canvas>','  <button>Start</button>','  <script>','    // JavaScript lives here','    document.addEventListener("keydown", move);','  <\/script>','</body>','</html>'];
-var HM=[{q:'🔎 Click the line where the CSS starts.',ok:[4]},{q:'🔎 Click a tag that puts something on the page, like the title.',ok:[11,12,13,14]},{q:'🔎 Click one CSS rule. It has { curly brackets }.',ok:[5,6,7]},{q:'🔎 Click the line where JavaScript starts.',ok:[15]},{q:'🔎 Click the line that makes the title orange.',ok:[6]}];
+var HM=[{q:'🔎 Click the line where the CSS starts.',ok:[4]},{q:'🔎 Click a tag that puts something on the page, like the title.',ok:[11,12,13,14]},{q:'🔎 Click one CSS rule. It has { curly brackets }.',ok:[5,6,7]},{q:'🔎 Click the line where JavaScript starts.',ok:[15]},{q:'🔎 Click the line that makes the title orange.',ok:[6]},{q:'🔎 Click the line that makes the score white.',ok:[7]}];
 var hi=0,hbox=$('#hunt-code');
 HC.forEach(function(l,i){var d=document.createElement('span');d.className='ln';d.textContent=l;d.dataset.i=i;hbox.appendChild(d)});
 function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done?'d':i===done?'c':'')+'"></span>';el.innerHTML=h}
@@ -791,7 +791,7 @@ cpDraw();
     jb.textContent='🛑 Stop it';iv=setInterval(function(){t+=.08;var w=$('.area',root).clientWidth-60;s1.style.left=(w/2+Math.sin(t)*(w/2))+'px';s2.style.left=(w/2+Math.cos(t*1.3)*(w/2))+'px';s2.style.top=(30+Math.sin(t*2)*20)+'px'},30)}})();
 
 /* sort game */
-var SG=[['There is no score on the screen','html','Something is missing: HTML.'],['The title says "My Game" but should say "Star Catcher"','html','Wrong words on screen: HTML.'],['The stars are tiny and gray','css','Something looks wrong: CSS.'],['The arrow keys do nothing','js','Something does not react: JavaScript. Week 3!'],['The background is plain white','css','How it looks: CSS.'],['There is no Start button','html','Something is missing: HTML.'],['The score text is too small to read','css','Size is style: CSS.'],['Pressing space does not make the player jump','js','Reacting to keys: JavaScript. Week 3!']];
+var SG=[['There is no score on the screen','html','Something is missing: HTML.'],['The title says "My Game" but should say "Star Catcher"','html','Wrong words on screen: HTML.'],['The stars are tiny and gray','css','Something looks wrong: CSS.'],['The arrow keys do nothing','js','Something does not react: JavaScript. Week 3!'],['The background is plain white','css','How it looks: CSS.'],['The score never goes up when you catch a star','js','Scoring is JavaScript. Week 3!'],['There is no Start button','html','Something is missing: HTML.'],['The score text is too small to read','css','Size is style: CSS.'],['Pressing space does not make the player jump','js','Reacting to keys: JavaScript. Week 3!']];
 var si=0,sLock=false;
 function sq(){dots($('#sort-dots'),SG.length,si);var q=$('#sort-q');q.classList.remove('in');void q.offsetWidth;q.classList.add('in');if(si>=SG.length){q.textContent='🎉 All sorted! Great job!';burst();return}q.textContent='"'+SG[si][0]+'"'}
 function sa(v){if(si>=SG.length||sLock)return;var g=SG[si];if(v===g[1]){sLock=true;$('#sort-fb').textContent='✅ '+g[2]+' +1 '+KIDS[T];addPt(T,1);good();si++;flipTurn();setTimeout(function(){sLock=false;$('#sort-fb').textContent='';sq()},1500)}else{bad();$('#sort-fb').textContent='🙈 Not quite. Is it missing, ugly, or not reacting?'}}
@@ -810,7 +810,7 @@ pmIn.addEventListener('input',pmDraw);
 $('#pm-copy').onclick=function(){copyText($('#pm-out').dataset.t,this)};pmDraw();
 
 /* prompt judge */
-var PJ=[['Make it better','Make the title twice as big',1,'Name the exact change. Codex can not read your mind!'],['Add a score in the top-right corner','Add more stuff',0,'Where and what. Super clear.'],['Change only the CSS in game.html. Make it look like ocean with turquoise and white colors.','Make it look cool',0,'It names the layer, the file, the theme and the colors.'],['Fix everything','game.html is missing a Start button. Add it.',1,'One missing thing per prompt.']];
+var PJ=[['Make it better','Make the title twice as big',1,'Name the exact change. Codex can not read your mind!'],['Add a score in the top-right corner','Add more stuff',0,'Where and what. Super clear.'],['Change only the CSS in game.html. Make it look like ocean with turquoise and white colors.','Make it look cool',0,'It names the layer, the file, the theme and the colors.'],['Fix everything','game.html is missing a Start button. Add it.',1,'One missing thing per prompt.'],['Make the buttons look fun','Change only the CSS in game.html. Make the Start button bigger and green.',1,'It names the layer, the file and the exact change.'],['Read prd.md. game.html is missing a lives counter. Add it.','Add the thing that is missing',0,'Say what is missing and where to look.']];
 var pi=0,pLock=false;
 function pjDraw(){dots($('#pj-dots'),PJ.length,pi);$('#pj-next').style.visibility='hidden';$('#pj-fb').textContent='';pLock=false;
   if(pi>=PJ.length){$('#pj').innerHTML='<div class="card grow c" style="min-height:170px;display:flex"><h2>🎉 You are a prompt pro!</h2></div>';burst();return}
@@ -889,9 +889,11 @@ var QZ=[
   {q:'The arrow keys do nothing. Which layer is that?',o:['HTML','CSS','JavaScript (Week 3)','GitHub'],a:2,s:20,w:'Reacting to keys is JavaScript. We learn it next week.'}]},
  {t:'Quiz 3',q:[
   {q:'What is a commit?',o:['A message to your teacher','A save point with a short message','A copy of someone else\'s game','A style rule'],a:1,s:20,w:'A commit is a save point.'},
+  {q:'What does "push" do?',o:['Makes your game faster','Deletes your repo','Opens Live Server','Sends your commits to GitHub'],a:3,s:20,w:'Push sends your save points to GitHub.'},
   {q:'What is GitHub?',o:['A game engine','The Codex panel in VS Code','A website that keeps your repo online','A kind of CSS rule'],a:2,s:20,w:'GitHub keeps your repo online.'},
   {q:'Where do you upload files to your repo on GitHub?',o:['Settings, then Pages','Your profile picture','The Codex panel','Add file, then Upload files'],a:3,s:20,w:'Add file, then Upload files.'},
-  {q:'Why is your my-arcade repo public?',o:['Private repos cost money','Public repos load faster','Next week it becomes a real website','Your teacher cannot see private repos'],a:2,s:20,w:'Next week it becomes a real website.'}]}];
+  {q:'Why is your my-arcade repo public?',o:['Private repos cost money','Public repos load faster','Next week it becomes a real website','Your teacher cannot see private repos'],a:2,s:20,w:'Next week it becomes a real website.'},
+  {q:'Which file must NEVER go in a public repo?',o:['A file with a password in it','index.html','prd.md','game.html'],a:0,s:20,w:'Never put a password or secret in a repo.'}]}];
 var qs={},qT=0;
 function qRender(root,qi){var Z=QZ[qi],st=qs[qi]||(qs[qi]={i:0,done:false,pts:KIDS.map(function(){return 0})});clearTimeout(qT);
   if(st.done){root.innerHTML='<div class="col c" style="gap:18px"><div style="font-size:100px">🏆</div><h2>'+Z.t+' done!</h2><p class="sub">'+KIDS.map(function(k,i){return k+' '+st.pts[i]}).join(' · ')+'</p><button class="btn" data-qr="1">Play again</button></div>';return}
