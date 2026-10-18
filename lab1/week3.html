@@ -345,7 +345,12 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
 .gc{min-height:48px;font-size:28px}.gl{min-height:50px;padding:7px 14px;font-size:22px}.gh{font-size:21px}
 .shc{padding:12px 16px;gap:8px}.shc .inp{font-size:18px;padding:6px 10px}
 .team{display:flex;align-items:center;gap:10px;font:700 26px var(--fh)}
-.ld .ldc{position:absolute;inset:0;width:100%;height:100%;display:none;z-index:2}
+.ld .ldc{position:absolute;inset:0;width:100%;height:100%;display:none;z-index:2;touch-action:none}
+.touch-controls{display:none;gap:10px;justify-content:center;align-items:center;margin-top:8px}
+.touch-controls.on{display:flex}
+.touch-controls button{min-width:64px;min-height:52px;border:3px solid var(--ink);border-radius:14px;background:#fff;box-shadow:0 4px 0 var(--ink);font:700 24px var(--fh);touch-action:none;user-select:none;-webkit-user-select:none}
+.touch-controls button:active,.touch-controls button.pressed{transform:translateY(3px);box-shadow:0 1px 0 var(--ink);background:var(--pink-l)}
+.touch-controls .tc-label{font:700 16px var(--fh);color:var(--mute);min-width:120px;text-align:center}
 .ld.kid .bk,.ld.kid .ap,.ld.kid .scr{display:none!important}
 #ld-kc{font-size:17px;font-weight:800;color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:999px;padding:4px 14px;box-shadow:0 3px 0 var(--ink)}
 </style>
@@ -381,7 +386,7 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
       <div class="card mint grow step"><div style="font-size:42px">📱</div><h3>3. Parent Test</h3><p class="small">Play it on another device and send it home</p></div>
     </div>
     <div class="card sun step"><p>🏁 <b>Finish line:</b> everyone's game plays at <span class="inl">your-name.github.io/my-arcade</span> and your family has the link.</p></div>
-    <div class="card step row mid" style="justify-content:space-around;padding:12px 20px"><span class="team">🏆 Teams:</span><span class="team">🌋 Lava: <span style="color:#DB2777">Francis</span> + <span style="color:#4D7C0F">Ian</span></span><span class="team">🌊 Wave: <span style="color:#0284C7">Lucas</span> + <span style="color:#C2410C">David</span></span></div>
+    <div class="card step row mid" style="justify-content:center;padding:12px 20px"><span class="team">🏆 Class points: every challenge earns points for the group!</span></div>
   </div>
 </section>
 
@@ -522,7 +527,7 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
       <li class="step">Commit message, then the green button:</li>
     </ol>
     <div class="prompt step"><code>Week 3: game plays + front door</code><button class="btn sm copy">Copy</button></div>
-    <div class="tip step" style="padding:6px 16px">🆕 David: your repo is brand new, so upload all 3 files: <span class="inl">index.html</span> <span class="inl">prd.md</span> <span class="inl">game.html</span></div>
+    <div class="tip step" style="padding:6px 16px">🆕 New repo? Upload all 3 files: <span class="inl">index.html</span> <span class="inl">prd.md</span> <span class="inl">game.html</span></div>
     <div class="card mint step"><p>🪄 Now open your <b>live link</b>, wait a minute, refresh. Your new front door is on the internet. <b>You</b> did that!</p></div>
     <div class="race" data-race="upload" data-goal="new front door is live"></div>
   </div>
@@ -550,7 +555,7 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
 
 <!-- 13b go live for real -->
 <section class="slide" data-sec="2">
-  <header><div class="hrow"><div><div class="kicker">David</div><h2>David goes live for real! 🚀</h2></div></div></header>
+  <header><div class="hrow"><div><div class="kicker">Go live together</div><h2>Publish your game 🚀</h2></div></div></header>
   <div class="body">
     <div class="row" style="gap:20px;align-items:stretch">
       <ol class="steps grow">
@@ -561,7 +566,7 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
         <li class="step">Wait 2 minutes, refresh, click <b>Visit site</b> 🎉</li>
       </ol>
       <div class="col" style="width:340px;justify-content:center">
-        <div class="card sun step"><p class="small">🎓 <b>Lucas, you're the teacher!</b> Tell David what to click. Hands off his mouse! Francis + Ian: watch and help.</p></div>
+        <div class="card sun step"><p class="small">🎓 Work with a partner: take turns reading each step and clicking. Help each other spot the right setting.</p></div>
         <div class="tip step">⏳ No Visit site button yet? Wait another minute. The first time can take up to 10 minutes.</div>
       </div>
     </div>
@@ -678,7 +683,7 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
 var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 var PFX='l1w3_';
 var store={get:function(k,d){try{var v=localStorage.getItem(PFX+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set:function(k,v){try{localStorage.setItem(PFX+k,JSON.stringify(v))}catch(e){}}};
-var KIDS=['Francis','Lucas','Ian','David'],COL=['#F472B6','#38BDF8','#A3E635','#FB923C'],DCOL=['#DB2777','#0284C7','#4D7C0F','#C2410C'];
+var KIDS=['Francis','Lucas','Ian'],COL=['#F472B6','#38BDF8','#A3E635','#FB923C'],DCOL=['#DB2777','#0284C7','#4D7C0F','#C2410C'];
 function zeros(v){return KIDS.map(function(){return v})}
 function padArr(a,v){a=Array.isArray(a)?a:[];while(a.length<KIDS.length)a.push(v);return a}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -714,7 +719,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('[data-time
 /* scoreboard */
 var sc=padArr(store.get('score',zeros(0)),0);
 function drawSB(bi){var h='';KIDS.forEach(function(k,i){h+='<span class="p"><span class="dot" style="background:'+COL[i]+'"></span>'+k+' <button data-i="'+i+'" data-d="-1">-</button><span class="n'+(bi===i?' bump':'')+'">'+sc[i]+'</span><button data-i="'+i+'" data-d="1">+</button></span>'});$('#sb').innerHTML=h}
-var TEAMS=[{n:'🌋',m:[0,2],name:'Team Lava'},{n:'🌊',m:[1,3],name:'Team Wave'}];
+var TEAMS=[{n:'⭐',m:KIDS.map(function(_,i){return i}),name:'Class'}];
 function teamPts(t){return t.m.reduce(function(a,i){return a+sc[i]},0)}
 var _drawSB=drawSB;drawSB=function(bi){_drawSB(bi);$('#sb').insertAdjacentHTML('beforeend',TEAMS.map(function(t){return '<span class="tm">'+t.n+' '+teamPts(t)+'</span>'}).join(''))};
 function addPt(i,d){sc[i]=Math.max(0,sc[i]+d);store.set('score',sc);drawSB(d>0?i:-1)}
@@ -729,7 +734,7 @@ $('#sb').addEventListener('click',function(e){var b=e.target.closest('button');i
 $$('.race').forEach(drawRace);drawSB();if(store.get('sbon',true))$('#sb').classList.add('on');
 
 /* turns */
-var T=store.get('turn',0);
+var T=store.get('turn',0)%KIDS.length;
 function drawTurns(){$$('.turnchip i').forEach(function(el){el.innerHTML='🎯 <span style="color:'+DCOL[T]+'">'+KIDS[T]+"</span>'s turn"})}
 function flipTurn(){T=(T+1)%KIDS.length;store.set('turn',T);drawTurns()}
 drawTurns();
@@ -746,7 +751,7 @@ var GAME=[
  {e:'🕹️',n:'Arcade',h:'A menu with a button for each game',c:'Neon buttons on a dark screen',j:'When you click Flappy Bird, that game starts',t:['Does every game in the menu open?','Can you get back to the menu?','Does each game end and show a score?'],fa:'I crash in the racing game',fb:'the screen (back to the arcade menu)',end:'🏁 Ending idea: every game ends, shows your score, and goes back to the menu.',ph:'In game.html, add big on-screen buttons so every game in my arcade can be played on a phone. Keep everything else the same.',s:'I built an arcade with lots of games. It is live.'},
  {e:'🐍',n:'Snake Battle',h:'Your snake and the bot snakes',c:'Your snake is green, bots are other colours',j:'When you eat a smaller snake, you grow',t:['Do the bot snakes move by themselves?','Does your snake grow when it eats?','Does a bigger snake eat you?'],fa:'my snake touches a smaller snake',fb:'my snake\'s length (it grows)',end:'🏁 Ending idea: lose when a bigger snake eats you, win when you are the biggest.',ph:'In game.html, add 4 big arrow buttons so my snake can be steered on a phone. Keep everything else the same.',s:'I built a snake battle game. It is live.'},
  {e:'🦖',n:'Dino Run',h:'A dino, cactuses and a score',c:'A grey dino in a white desert',j:'When you press space, the dino jumps',t:['Does space make the dino jump?','Does hitting a cactus end the game?','Does the score go up as you run?'],fa:'the dino hits a cactus',fb:'the screen (show Game Over)',end:'🏁 Ending idea: lose when you hit a cactus, then show your score and high score.',ph:'In game.html, make the dino jump when I tap the screen, so it works on a phone. Keep everything else the same.',s:'I built a dino runner game. It is live.'}];
-function kidTabs(el,onPick,extra){var html=(extra?'<button class="ktab" data-k="-1">'+extra+'</button>':'')+KIDS.map(function(k,i){return '<button class="ktab" data-k="'+i+'">'+GAME[i].e+' '+k+'</button>'}).join('');el.innerHTML=html;
+function kidTabs(el,onPick,extra,items){items=items||KIDS.map(function(k,i){return {label:GAME[i].e+' '+k,index:i}});var html=(extra?'<button class="ktab" data-k="-1">'+extra+'</button>':'')+items.map(function(item){return '<button class="ktab" data-k="'+item.index+'">'+item.label+'</button>'}).join('');el.innerHTML=html;
   $$('.ktab',el).forEach(function(b){b.onclick=function(){$$('.ktab',el).forEach(function(x){x.classList.toggle('sel',x===b)});tone(620,.08);onPick(+b.dataset.k)}})}
 /* gallery */
 $('#gal').innerHTML=KIDS.map(function(k,i){return '<div><div class="e">'+GAME[i].e+'</div><b style="color:'+DCOL[i]+'">'+k+'</b><span>'+GAME[i].n+'</span><br><span style="font-weight:900;color:'+(i<3?'#15803d':'#C2410C')+'">'+(i<3?'🌍 Already live':'🚀 Goes live today!')+'</span></div>'}).join('');
@@ -767,7 +772,7 @@ function makeGrid(el,rows,key){var st=store.get(key,{}),h='<div></div>';KIDS.for
   el.style.gridTemplateColumns='1fr '+KIDS.map(function(){return '118px'}).join(' ');el.innerHTML=h;
   el.addEventListener('click',function(e){var b=e.target.closest('.gc');if(!b)return;var k=b.dataset.k,v=st[k]||'';v=v===''?'1':v==='1'?'2':'';st[k]=v;store.set(key,st);b.className='gc '+(v==='1'?'ok':v==='2'?'sos':'');b.textContent=v==='1'?'✅':v==='2'?'🆘':'';if(v==='1')tone(700,.12);
     var n=0;Object.keys(st).forEach(function(x){if(st[x]==='1')n++});if(v==='1'&&n===rows.length*KIDS.length){good();burst()}})}
-makeGrid($('#g-ready'),['💻 Laptop and VS Code open','📁 my-arcade folder with game.html','🐙 Signed in to GitHub','🌍 My live link opens (David: not yet!)'],'ready');
+makeGrid($('#g-ready'),['💻 Laptop and VS Code open','📁 my-arcade folder with game.html','🐙 Signed in to GitHub','🌍 My live link opens'],'ready');
 makeGrid($('#g-teach'),['⚙️ Said: Settings, then Pages','🌿 Said: Deploy from a branch','📁 Said: main and / (root), then Save','⏳ Said: wait a few minutes, then refresh','🔒 Knows: the repo must be Public'],'teach');
 makeGrid($('#g-parent'),['🎮 Played one full round on the live site','📱 Opened the link on another device','🔁 Played a round there too','💤 Closed the laptop, refreshed: still loads!','✍️ Wrote down 1 thing that broke or looks tiny'],'parent');
 makeGrid($('#g-done'),['🔧 Woke up 2 sleeping things with when/change prompts','🏁 Game can end: win, lose or timer','🚪 index.html has a Play button','⬆️ Uploaded both files: Week 3: game plays + front door','🌍 Game plays at my github.io address','🏠 Played it on another device and sent it home'],'done');
@@ -783,7 +788,7 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
     place();rafL=requestAnimationFrame(step)}
   function go(){if(!rafL)rafL=requestAnimationFrame(step)}
   $$('.lt').forEach(function(t){t.onclick=function(){var l=t.dataset.l;on[l]=!on[l];t.classList.toggle('on',on[l]);ld.classList.toggle(l,on[l]);ap.textContent=on.c?'🍎':'apple';bk.textContent=on.c?'🧺':'basket';tone(on[l]?700:300,.12);msg();if(on.h&&on.c&&on.j)burstAt(ld);go();kgo()}});
-  function hold(btn,k){btn.addEventListener('pointerdown',function(){keys[k]=true;if(!on.j&&on.h)bad()});['pointerup','pointerleave'].forEach(function(ev){btn.addEventListener(ev,function(){keys[k]=false})})}
+  function hold(btn,k){btn.addEventListener('pointerdown',function(){keys[k]=true;if(!on.j&&on.h)bad()});['pointerup','pointercancel','pointerleave'].forEach(function(ev){btn.addEventListener(ev,function(){keys[k]=false})})}
   hold($('#ld-l'),'l');hold($('#ld-r'),'r');
   document.addEventListener('keydown',function(e){if(!$('#s-layers').classList.contains('active'))return;if(e.key==='a'||e.key==='A')keys.l=true;if(e.key==='d'||e.key==='D')keys.r=true});
   document.addEventListener('keyup',function(e){if(e.key==='a'||e.key==='A')keys.l=false;if(e.key==='d'||e.key==='D')keys.r=false});
@@ -797,10 +802,12 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
       if(ch.n>prevTop){addPt(ch.k,2);toast('🏆 New record! '+KIDS[ch.k]+' caught '+ch.n+' (+2)');burstAt($('#ld'))}else toast(KIDS[ch.k]+' caught '+ch.n+'!');flipTurn()}},1000)};
   board();
   var LG0={h:'<div id="basket">',c:'#basket { background: orange; }',j:'when A is pressed, basket moves left'};
-  kidTabs($('#lg-tabs'),function(i){setGame(i);var g=i<0?LG0:{h:GAME[i].h,c:GAME[i].c,j:GAME[i].j};$('#lg-h').textContent=g.h;$('#lg-c').textContent=g.c;$('#lg-j').textContent=g.j},'🧺 Apples');$('.ktab',$('#lg-tabs')).classList.add('sel');
+  kidTabs($('#lg-tabs'),function(i){setGame(i);var g=i<0?LG0:{h:GAME[i].h,c:GAME[i].c,j:GAME[i].j};$('#lg-h').textContent=g.h;$('#lg-c').textContent=g.c;$('#lg-j').textContent=g.j},'🧺 Apples',[{label:'🏰 Tower Defence',index:0},{label:'🕹️ Arcade',index:1},{label:'🐍 Snake Battle',index:2},{label:'🦖 Dino Run',index:3}]);$('.ktab',$('#lg-tabs')).classList.add('sel');
     /* ===== each kid's own mini game, same 3 switches ===== */
   var cur=-1,cv2=document.createElement('canvas');cv2.width=560;cv2.height=330;cv2.className='ldc';ld.appendChild(cv2);
   var X=cv2.getContext('2d'),kraf=0,klast=0,KK={},FH="'Fredoka',sans-serif",TNR="'Times New Roman',serif";
+  var touch=document.createElement('div');touch.className='touch-controls';touch.setAttribute('aria-label','Touch game controls');touch.innerHTML='<button type="button" data-key="a" aria-label="Move left">◀</button><button type="button" data-key="w" aria-label="Move up">▲</button><button type="button" data-key="s" aria-label="Move down">▼</button><button type="button" data-key="d" aria-label="Move right">▶</button><span class="tc-label"></span>';ld.parentNode.insertBefore(touch,ld.nextSibling);
+  $$('.touch-controls button',touch).forEach(function(btn){function press(e){e.preventDefault();var key=btn.dataset.key,g=KG[cur];if(!on.h||!on.j||!g)return;btn.classList.add('pressed');if(cur===2){if(g.key)g.key(key)}else{KK[key]=true}}function release(e){if(e)e.preventDefault();btn.classList.remove('pressed');KK[btn.dataset.key]=false}btn.addEventListener('pointerdown',function(e){if(btn.setPointerCapture)btn.setPointerCapture(e.pointerId);press(e)});['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){btn.addEventListener(ev,release)})});
   function rnd(a){return a[Math.floor(Math.random()*a.length)]}
   function txt(s,x,y,sz,col,font,al){X.font=sz+'px '+(font||FH);X.fillStyle=col||'#000';X.textAlign=al||'left';X.textBaseline='middle';X.fillText(s,x,y)}
   function emo(e,x,y,sz,flip,rot){X.save();X.font=sz+'px sans-serif';X.textAlign='center';X.textBaseline='middle';X.translate(x,y);if(rot)X.rotate(rot);if(flip)X.scale(-1,1);X.fillText(e,0,0);X.restore()}
@@ -873,7 +880,7 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
         if(st){txt('Score '+s.sc,12,20,20,m==='inv'?'#fff':'#0f172a');X.fillStyle='rgba(15,23,42,.7)';rr(462,6,90,30,10);X.fill();txt('◀ Menu',507,22,16,'#fff',FH,'center')}
         else{txt('Score: '+s.sc,10,16,14,'#000',TNR);box(462,6,90,30,'Menu')}
         if(s.end)over('GAME OVER','Score: '+s.sc+'  ·  back to the menu',st)},
-      click:function(x,y){if(s.mode==='menu'){BTN.forEach(function(b,i){var by=95+i*62;if(x>140&&x<420&&y>by&&y<by+48)start(b[2])});return}
+      mode:function(){return s.mode},click:function(x,y){if(s.mode==='menu'){BTN.forEach(function(b,i){var by=95+i*62;if(x>140&&x<420&&y>by&&y<by+48)start(b[2])});return}
         if(menuBtn(x,y)){s.mode='menu';s.end=0;tone(500,.06);return}if(s.end)return;
         if(s.mode==='flappy'){s.vy=-290;tone(900,.03)}if(s.mode==='race'){if(x<280)s.lane=Math.max(0,s.lane-1);else s.lane=Math.min(2,s.lane+1)}}}})();
 
@@ -903,7 +910,7 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
         if(s.end)over(s.end,(st?'C':'c')+'lick to play again',st)},
       click:function(){if(s.end)reset()}}})();
 
-  /* David: dino run */
+  /* Dino Run touch demo */
   var DN=(function(){var G=270,s,hi=0;
     function reset(){s={y:0,vy:0,cac:[{x:330,w:20,h:40},{x:520,w:26,h:32}],t:1.2,spd:260,sc:0,end:false,cl:[{x:120,y:60},{x:400,y:95}]}}reset();
     function jump(){if(s.end){reset();return}if(s.y===0){s.vy=560;tone(600,.05)}}
@@ -923,8 +930,10 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
   function kdraw(){X.clearRect(0,0,560,330);if(cur<0||!on.h)return;KG[cur].draw(on.c)}
   function kstep(t){kraf=0;if(cur<0||!$('#s-layers').classList.contains('active'))return;var dt=Math.min(.05,(t-(klast||t))/1000);klast=t;if(on.h&&on.j)KG[cur].update(dt);kdraw();kraf=requestAnimationFrame(kstep)}
   function kgo(){cv2.style.display=cur>=0&&on.h?'block':'none';kdraw();if(!kraf&&cur>=0){klast=0;kraf=requestAnimationFrame(kstep)}}
-  function setGame(i){cur=i;ld.classList.toggle('kid',i>=0);KK={};if(i>=0)KG[i].reset();$('#ld-appc').style.display=i<0?'':'none';$('#ld-board').style.display=i<0?'':'none';var kc=$('#ld-kc');kc.style.display=i<0?'none':'';if(i>=0)kc.textContent=KG[i].ctl;cv2.style.cursor=i===2?'default':'pointer';msg();kgo();go()}
-  cv2.addEventListener('click',function(e){if(cur<0||!on.h)return;if(!on.j){bad();toast('😴 Asleep! Turn on JavaScript.');return}var r=cv2.getBoundingClientRect(),x=(e.clientX-r.left)*560/r.width,y=(e.clientY-r.top)*330/r.height;if(KG[cur].click)KG[cur].click(x,y)});
+  function setGame(i){cur=i;ld.classList.toggle('kid',i>=0);KK={};if(i>=0)KG[i].reset();touch.classList.toggle('on',i===2);$('.tc-label',touch).textContent='Tap arrows to steer';$$('.touch-controls button',touch).forEach(function(b){b.style.display=''});$('#ld-appc').style.display=i<0?'':'none';$('#ld-board').style.display=i<0?'':'none';var kc=$('#ld-kc');kc.style.display=i<0?'none':'';if(i>=0)kc.textContent=KG[i].ctl;cv2.style.cursor=i===2?'default':'pointer';msg();kgo();go()}
+  cv2.addEventListener('pointerdown',function(e){if(cur<0||!on.h)return;if(!on.j){bad();toast('😴 Asleep! Turn on JavaScript.');return}var r=cv2.getBoundingClientRect(),x=(e.clientX-r.left)*560/r.width,y=(e.clientY-r.top)*330/r.height;if(cur===1&&KG[cur].mode()==='inv'){KK[x<280?'a':'d']=true;cv2.setPointerCapture(e.pointerId)}else if(cur===2){var dx=e.clientX-r.left,dy=e.clientY-r.top;if(Math.max(Math.abs(dx),Math.abs(dy))>18){var k=Math.abs(dx)>Math.abs(dy)?(dx<r.width/2?'a':'d'):(dy<r.height/2?'w':'s');if(KG[cur].key)KG[cur].key(k)}}if(KG[cur].click)KG[cur].click(x,y)},{passive:false});
+  cv2.addEventListener('pointermove',function(e){if(cur!==1||!e.buttons||KG[cur].mode()!=='inv')return;var r=cv2.getBoundingClientRect();KK.a=e.clientX<r.left+r.width/2;KK.d=!KK.a});
+  ['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){cv2.addEventListener(ev,function(){KK.a=false;KK.d=false})});
   document.addEventListener('keydown',function(e){if(cur<0||!$('#s-layers').classList.contains('active'))return;var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'))return;var k=e.key===' '?' ':String(e.key).toLowerCase(),g=KG[cur];if(!g.keys||g.keys.indexOf(k)<0)return;
     e.preventDefault();e.stopImmediatePropagation();if(!on.h)return;if(!on.j){if(!e.repeat){bad();toast('😴 Asleep! Turn on JavaScript.')}return}KK[k]=true;if(g.key&&!e.repeat)g.key(k)},true);
   document.addEventListener('keyup',function(e){var k=e.key===' '?' ':String(e.key).toLowerCase();KK[k]=false},true);
@@ -1030,7 +1039,7 @@ $('#sh-copy').onclick=function(){var t='Hi families! Today in AI Project Lab 1 y
 var QZ=[
  {t:'Quiz 1',q:[
   {q:'What does JavaScript add to a game?',o:['What exists on the page','How the page looks','What happens when you play','A web address'],a:2,s:20,w:'JavaScript is what happens when you play.'},
-  {q:'"When David presses space, his dino jumps." Which layer is that?',o:['HTML','CSS','GitHub Pages','JavaScript'],a:3,s:25,w:'When something happens, something changes: JavaScript.'}]},
+  {q:'"When Space is pressed, the dino jumps." Which layer is that?',o:['HTML','CSS','GitHub Pages','JavaScript'],a:3,s:25,w:'When something happens, something changes: JavaScript.'}]},
  {t:'Quiz 2',q:[
   {q:'What does GitHub Pages do?',o:['Turns a public repo into a website','Writes your game for you','Checks your spelling','Makes your repo private'],a:0,s:20,w:'Pages turns a public repo into a website.'},
   {q:'Where do you turn on GitHub Pages?',o:['Add file, then Upload files','Settings, then Pages','The Codex panel','Your profile picture'],a:1,s:20,w:'Settings, then Pages.'},
@@ -1066,7 +1075,7 @@ KIDS.forEach(function(k,i){var r=document.createElement('div');r.className='row 
 function podium(){var mx=Math.max.apply(null,[1].concat(sc));$('#pod').innerHTML=KIDS.map(function(k,i){var top=sc[i]===mx&&sc[i]>0;return '<div class="pc"><div style="font-size:50px;height:60px">'+(top?'👑':GAME[i].e)+'</div><div style="font:700 28px var(--fh);color:'+DCOL[i]+'">'+k+'</div><div class="bar" data-h="'+(60+120*sc[i]/mx)+'" style="background:'+COL[i]+'">'+sc[i]+'</div></div>'}).join('');
   setTimeout(function(){$$('#pod .bar').forEach(function(b){b.style.height=b.dataset.h+'px'})},60);
   var tops=KIDS.filter(function(k,i){return sc[i]===mx&&sc[i]>0});
-  var tp=TEAMS.map(teamPts);$('#pod-team').textContent=TEAMS[0].n+' Lava '+tp[0]+'  vs  '+TEAMS[1].n+' Wave '+tp[1]+(tp[0]===tp[1]?'  🤝 Team tie!':'  🏆 '+(tp[0]>tp[1]?TEAMS[0].name:TEAMS[1].name)+' wins!');
+  var tp=TEAMS.map(teamPts);$('#pod-team').textContent='⭐ Class points: '+tp[0];
   $('#pod-msg').textContent=(tops.length===1?'🎉 Top scorer: '+tops[0]+'!':tops.length>1?'🤝 Tie at the top: '+tops.join(' and ')+'!':'🎉 Great class!')+' And everyone has a game on the internet.';setTimeout(function(){burst(640,250)},700)}
 hooks['s-trophy']=podium;$('#pod-party').onclick=function(){good();burst(400,300);burst(880,300)};
 
