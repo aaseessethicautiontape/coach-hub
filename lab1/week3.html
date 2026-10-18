@@ -319,6 +319,7 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
 .prog{display:flex;flex-direction:column;gap:8px}
 .prog div{font:600 19px var(--fh);display:flex;gap:8px;align-items:center;color:var(--mute)}
 .prog div.d{color:var(--ink)}.prog div.d::before{content:'✅'}.prog div:not(.d)::before{content:'⬜'}
+.pa-field{display:flex;flex:1 1 280px;flex-direction:column;gap:6px;font:700 18px var(--fh)}.pa-field input{width:100%}
 .fake{border:3px solid var(--ink);border-radius:14px;overflow:hidden;background:#fff}
 .fake .bar{background:#e5e7eb;padding:6px 12px;font:700 16px var(--fm);color:#374151}
 .fake .pgx{padding:20px;text-align:center;background:linear-gradient(#0b1840,#1e3a8a);color:#fff}
@@ -469,7 +470,7 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
     <div class="row" style="gap:24px;align-items:center">
       <div class="col" style="width:560px;gap:10px">
         <div class="ld" id="ld"><div class="empty">(nothing exists yet)</div><div class="scr">Caught: <span id="ld-n">0</span></div><div class="ap">apple</div><div class="bk">basket</div></div>
-        <div class="row c mid" style="gap:10px"><span id="ld-appc" class="row c mid" style="gap:10px"><button class="btn sm alt" id="ld-l">◀</button><button class="btn sm alt" id="ld-r">▶</button><span class="hint" style="white-space:nowrap">A/D</span><button class="btn sm sun" id="ld-ch">⏱ 20s apple challenge</button><span class="turnchip"><i></i></span></span><span id="ld-kc" style="display:none"></span></div>
+        <div class="row c mid" style="gap:10px"><span id="ld-appc" class="row c mid" style="gap:10px"><button class="btn sm alt" id="ld-l">◀</button><button class="btn sm alt" id="ld-r">▶</button><span class="hint" style="white-space:nowrap">A/D or tap ◀ ▶</span><button class="btn sm sun" id="ld-ch">⏱ 20s apple challenge</button><span class="turnchip"><i></i></span></span><span id="ld-kc" style="display:none"></span></div>
         <div class="board" id="ld-board"></div>
       </div>
       <div class="col grow" style="gap:12px">
@@ -641,9 +642,9 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
   <span class="bonus-badge">⭐ Bonus</span>
   <header><div class="kicker">Predict it</div><h2>What is your web address? 🔮</h2></header>
   <div class="body">
-    <p>Your address is built from your <b>GitHub username</b>. Type yours:</p>
-    <div class="row mid"><input class="inp grow" id="pa-in" placeholder="your GitHub username"><button class="btn" id="pa-go">🔮 Predict</button></div>
-    <div class="fake"><div class="bar" id="pa-bar">https://_____.github.io/my-arcade/</div><div class="pgx"><h3>🎮 My Arcade</h3><p class="small">Is that your real address? Check it!</p></div></div>
+    <p>A project site address uses <b>both</b> your GitHub username and your repository name. They can be different.</p>
+    <div class="row mid"><label class="pa-field">GitHub username<input class="inp" id="pa-in" placeholder="e.g. alex-codes" autocomplete="off"></label><label class="pa-field">Repository name<input class="inp" id="pa-repo" placeholder="e.g. my-game" autocomplete="off"></label><button class="btn" id="pa-go">🔮 Predict</button></div>
+    <div class="fake"><div class="bar" id="pa-bar">https://username.github.io/repository/</div><div class="pgx"><h3 id="pa-title">🎮 Your project</h3><p class="small">Username goes before <b>.github.io</b>; repository name goes after it.</p></div></div>
   </div>
 </section>
 
@@ -667,7 +668,7 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
     <p class="small">A deploy puts your game on a computer that <b>never sleeps</b>. Prove it! Tick each one:</p>
     <div id="g-parent" class="grid"></div>
     <div class="race" data-race="device" data-goal="played on another device"></div>
-    <div class="warn">⌨️ Arrow keys? A phone has none! Write that down. It is a real fix for later.</div>
+    <div class="warn">⌨️ No keyboard? Add touch buttons or tap controls so the game still plays.</div>
   </div>
 </section>
 
@@ -735,7 +736,7 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
   <div class="nav"><button id="mode" title="B: bonus slides on or off">Short mode</button><button id="fsb" title="Fullscreen (F)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#2B1B2E" stroke-width="2.4" stroke-linecap="round"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg></button><button id="b-prev">◀</button><span id="num"></span><button id="b-next">▶</button></div>
   <div id="prog"></div>
 </div>
-<div class="ov on" id="start"><div class="card"><div style="font-size:70px">🎬</div><h2 style="margin:6px 0">Ready to present?</h2><p class="sub">Click anywhere to go fullscreen</p><p class="hint" style="margin-top:12px">Arrow keys to move. Press H for help.</p></div></div>
+<div class="ov on" id="start"><div class="card"><div style="font-size:70px">🎬</div><h2 style="margin:6px 0">Ready to present?</h2><p class="sub">Tap or click anywhere to go fullscreen</p><p class="hint" style="margin-top:12px">Arrow keys / Space move through slides. Tap or swipe to navigate.</p></div></div>
 <div class="ov" id="tmenu"><div class="card"><h3>⏱ Timer</h3><div class="chips" id="tm-c"></div><p class="hint" style="margin-top:12px">Esc to close</p></div></div>
 <div class="ov" id="help"><div class="card"><h3>⌨️ Shortcuts</h3><p class="small">→ or Space: next &nbsp;·&nbsp; ←: back<br>F: fullscreen &nbsp;·&nbsp; S: scoreboard &nbsp;·&nbsp; T: timer<br>B: bonus slides on or off<br>1 2 3 4: pick a quiz answer<br>Home: first slide &nbsp;·&nbsp; Shift+R: reset for a new class<br>Esc: close</p></div></div>
 <canvas id="conf"></canvas>
@@ -843,7 +844,7 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
 
 /* layer demo */
 (function(){var ld=$('#ld'),on={h:false,c:false,j:false},bk=$('.bk',ld),ap=$('.ap',ld),bx=230,ax=120,ay=20,n=0,rafL=0,keys={};
-  var KCT=['press A or D','click the grass','click a game','press W A S D','press Space'],KWIN=['Click the grass to build towers! 🏰','Pick a game! 🕹️','W A S D to steer. Eat smaller snakes! 🐍','Space to jump over the cactus! 🦖'];
+  var KCT=['press A or D or tap ◀ ▶','tap the grass','tap a game','use arrows/WASD or tap arrows','press Space or tap JUMP'],KWIN=['Tap open grass to build towers! 🏰','Tap a game! 🕹️','Arrows/WASD or swipe to steer. Eat smaller snakes! 🐍','Space or tap JUMP to clear the cactus! 🦖'];
   function msg(){var c=(typeof cur==='number'&&cur>=0)?cur:-1,ctl=KCT[c+1];var m=!on.h?(on.c||on.j?'🙈 Nothing to style or move! HTML has to make things exist first.':'👆 Turn the layers on one at a time.'):!on.c&&!on.j?'🧱 Things exist... but they look plain and do nothing.':on.c&&!on.j?'🎨 Looks great! But '+ctl+'... nothing happens. 😴':!on.c&&on.j?'🧠 It works, but it looks plain. Turn on CSS!':(c<0?'🎉 All 3 layers! Catch the apples!':'🎉 All 3 layers! '+KWIN[c]);$('#ld-msg').textContent=m}
   function place(){bk.style.left=bx+'px';ap.style.left=ax+'px';ap.style.top=ay+'px'}
   function step(){rafL=0;if(!(on.h&&on.j)||(typeof cur==='number'&&cur>=0)||!$('#s-layers').classList.contains('active'))return;ay+=on.c?3.2:2.6;if(keys.l)bx-=7;if(keys.r)bx+=7;bx=Math.max(0,Math.min(452,bx));
@@ -911,7 +912,7 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
     function start(m){s.mode=m;s.sc=0;s.end=0;if(m==='flappy'){s.y=160;s.vy=0;s.pipes=[];s.pt=.6}if(m==='race'){s.lane=1;s.cars=[];s.ct=.4;s.spd=220}if(m==='inv'){s.sx=280;s.bul=[];s.bt=0;wave()}tone(700,.1)}
     function finish(){s.last=s.sc;s.end=1.6;bad()}
     function menuBtn(x,y){return x>462&&x<552&&y>6&&y<36}
-    return {reset:reset,ctl:'Tap a game to open · tap or hold arrows to steer',keys:[' ','w','a','d'],
+    return {reset:reset,ctl:'Tap a game · A/D or arrows move · Space/W flaps',keys:[' ','w','a','d'],
       key:function(k){if(s.end)return;if(s.mode==='flappy'&&(k===' '||k==='w')){s.vy=-290;tone(900,.03)}if(s.mode==='race'){if(k==='a')s.lane=Math.max(0,s.lane-1);if(k==='d')s.lane=Math.min(2,s.lane+1)}if(s.mode==='inv'&&(k==='a'||k==='d'))s.sx=Math.max(20,Math.min(540,s.sx+(k==='a'?-72:72)))},
       update:function(dt){if(s.end){s.end-=dt;if(s.end<=0){s.end=0;s.mode='menu'}return}
         if(s.mode==='flappy'){s.vy+=900*dt;s.y+=s.vy*dt;s.pt-=dt;if(s.pt<=0){s.pipes.push({x:560,g:80+Math.random()*170,p:false});s.pt=1.5}
@@ -956,7 +957,7 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
     function hit(p,sn,skip){for(var i=skip?1:0;i<sn.b.length;i++)if(sn.b[i].x===p.x&&sn.b[i].y===p.y)return true;return false}
     function respawn(i){var p=rp();s.bots[i]=mk(p.x,p.y,3,Math.random()<.5?1:-1,0)}
     function cell(c,st,col,head,label){var x=c.x*C,y=OY+c.y*C;if(st){X.fillStyle=col;rr(x+1,y+1,C-2,C-2,5);X.fill();if(head){X.fillStyle='#fff';X.fillRect(x+5,y+5,4,4);X.fillRect(x+11,y+5,4,4)}}else{X.strokeStyle='#000';X.lineWidth=1;X.strokeRect(x+1.5,y+1.5,C-3,C-3);if(label)txt(label,x+C/2,y-6,12,'#000',TNR,'center')}}
-    return {reset:reset,ctl:'Tap arrows or swipe to steer · eat smaller snakes, avoid bigger ones',keys:['w','a','s','d'],
+    return {reset:reset,ctl:'Arrows/WASD or tap/swipe to steer · eat smaller snakes',keys:['w','a','s','d'],
       key:function(k){var d={w:[0,-1],s:[0,1],a:[-1,0],d:[1,0]}[k];if(!d||(d[0]===-s.me.dx&&d[1]===-s.me.dy))return;s.ndx=d[0];s.ndy=d[1]},
       update:function(dt){if(s.end)return;s.t+=dt;if(s.t<.14)return;s.t=0;s.me.dx=s.ndx;s.me.dy=s.ndy;
         s.bots.forEach(function(b){if(Math.random()<.18){var o=rnd([[1,0],[-1,0],[0,1],[0,-1]].filter(function(o){return !(o[0]===-b.dx&&o[1]===-b.dy)}));b.dx=o[0];b.dy=o[1]}});
@@ -977,7 +978,7 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
   var DN=(function(){var G=270,s,hi=0;
     function reset(){s={y:0,vy:0,cac:[{x:330,w:20,h:40},{x:520,w:26,h:32}],t:1.2,spd:260,sc:0,end:false,cl:[{x:120,y:60},{x:400,y:95}]}}reset();
     function jump(){if(s.end){reset();return}if(s.y===0){s.vy=560;tone(600,.05)}}
-    return {reset:reset,ctl:'Tap JUMP or the game to jump',keys:[' ','w'],key:function(){jump()},click:function(){jump()},
+    return {reset:reset,ctl:'Space/W or tap JUMP/the game to jump',keys:[' ','w'],key:function(){jump()},click:function(){jump()},
       update:function(dt){if(s.end)return;s.vy-=1600*dt;s.y=Math.max(0,s.y+s.vy*dt);if(s.y===0&&s.vy<0)s.vy=0;s.spd+=6*dt;s.sc+=dt*10;
         s.t-=dt;if(s.t<=0){s.cac.push({x:580,w:16+Math.random()*12,h:28+Math.random()*24});s.t=.9+Math.random()*.9}
         s.cac.forEach(function(c){c.x-=s.spd*dt});s.cac=s.cac.filter(function(c){return c.x>-40});s.cl.forEach(function(c){c.x-=30*dt;if(c.x<-60)c.x=600});
@@ -998,9 +999,9 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
   var swipe=null,activePointer=null;cv2.addEventListener('pointerdown',function(e){if(cur<0||!on.h)return;if(!on.j){bad();toast('😴 Asleep! Turn on JavaScript.');return}var r=cv2.getBoundingClientRect(),x=(e.clientX-r.left)*560/r.width,y=(e.clientY-r.top)*330/r.height;if(cur===1&&KG[cur].mode()==='inv'){var key=x<280?'a':'d';KG[cur].key(key);KK[key]=true;activePointer=e.pointerId;cv2.setPointerCapture(e.pointerId)}else if(cur===2){swipe={x:e.clientX,y:e.clientY}}if(KG[cur].click)KG[cur].click(x,y)},{passive:false});
   cv2.addEventListener('pointermove',function(e){if(cur===1&&activePointer===e.pointerId&&KG[cur].mode()==='inv'){var r=cv2.getBoundingClientRect();KK.a=e.clientX<r.left+r.width/2;KK.d=!KK.a;return}if(cur!==2||!swipe)return;var dx=e.clientX-swipe.x,dy=e.clientY-swipe.y;if(Math.max(Math.abs(dx),Math.abs(dy))<24)return;var k=Math.abs(dx)>Math.abs(dy)?(dx<0?'a':'d'):(dy<0?'w':'s');if(KG[cur].key)KG[cur].key(k);swipe=null});
   ['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){cv2.addEventListener(ev,function(){KK.a=false;KK.d=false;swipe=null;activePointer=null})});
-  document.addEventListener('keydown',function(e){if(cur<0||!$('#s-layers').classList.contains('active'))return;var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'))return;var k=e.key===' '?' ':String(e.key).toLowerCase(),g=KG[cur];if(!g.keys||g.keys.indexOf(k)<0)return;
+  document.addEventListener('keydown',function(e){if(cur<0||!$('#s-layers').classList.contains('active'))return;var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'))return;var k=e.key===' '?' ':String(e.key).toLowerCase(),g=KG[cur];k={arrowup:'w',arrowdown:'s',arrowleft:'a',arrowright:'d'}[k]||k;if(!g.keys||g.keys.indexOf(k)<0)return;
     e.preventDefault();e.stopImmediatePropagation();if(!on.h)return;if(!on.j){if(!e.repeat){bad();toast('😴 Asleep! Turn on JavaScript.')}return}KK[k]=true;if(g.key&&!e.repeat)g.key(k)},true);
-  document.addEventListener('keyup',function(e){var k=e.key===' '?' ':String(e.key).toLowerCase();KK[k]=false},true);
+  document.addEventListener('keyup',function(e){var k=e.key===' '?' ':String(e.key).toLowerCase();k={arrowup:'w',arrowdown:'s',arrowleft:'a',arrowright:'d'}[k]||k;KK[k]=false},true);
   window.__kg={set:setGame,cur:function(){return cur},games:KG};
 
   window.__ld={on:on,n:function(){return n}};
@@ -1084,18 +1085,19 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
   spBoard();code();window.__gp={code:code}})();
 
 /* predict address */
-$('#pa-go').onclick=function(){var u=$('#pa-in').value.trim().toLowerCase().replace(/[^a-z0-9-]/g,'');$('#pa-bar').textContent='https://'+(u||'_____')+'.github.io/my-arcade/';if(u){good();burstAt($('#pa-bar'))}};
-$('#pa-in').addEventListener('keydown',function(e){e.stopPropagation();if(e.key==='Enter')$('#pa-go').click()});
+function predictAddress(){var ui=$('#pa-in'),ri=$('#pa-repo'),u=ui.value.trim().toLowerCase().replace(/[^a-z0-9-]/g,''),r=ri.value.trim().replace(/[^a-zA-Z0-9._-]/g,'').replace(/^\.+|\.+$/g,'');if(!u||!r){toast('Enter both your GitHub username and repo name.');bad();return}ui.value=u;ri.value=r;$('#pa-bar').textContent='https://'+u+'.github.io/'+encodeURIComponent(r)+'/';$('#pa-title').textContent='🎮 '+r;good();burstAt($('#pa-bar'))}
+$('#pa-go').onclick=predictAddress;[$('#pa-in'),$('#pa-repo')].forEach(function(input){input.addEventListener('keydown',function(e){e.stopPropagation();if(e.key==='Enter')predictAddress()})});
 
 /* send it home */
-var SH=store.get('home',[]),RE=/^https:\/\/[a-z0-9-]+\.github\.io\/my-arcade\/?$/i;
+var SH=store.get('home',[]);
+function validPagesUrl(value){try{var u=new URL(value);return u.protocol==='https:'&&/^[a-z0-9-]+\.github\.io$/i.test(u.hostname)&&/^\/(?:[a-z0-9._-]+)?\/?$/i.test(u.pathname)&&!/^\/\.{1,2}\/?$/.test(u.pathname)}catch(e){return false}}
 SH=padArr(SH,null).map(function(x,i){return x||{u:'',s:GAME[i].s}});
 KIDS.forEach(function(k,i){var d=document.createElement('div');d.className='card col shc';
-  d.innerHTML='<div class="row mid" style="gap:10px"><b style="width:76px;font:700 22px var(--fh);color:'+DCOL[i]+'">'+k+'</b><input class="inp sh-u grow" placeholder="https://your-name.github.io/my-arcade/" value="'+esc(SH[i].u)+'"></div><input class="inp sh-s" value="'+esc(SH[i].s)+'"><div class="fbt" style="text-align:left;font-size:17px;min-height:24px"></div>';
+  d.innerHTML='<div class="row mid" style="gap:10px"><b style="width:76px;font:700 22px var(--fh);color:'+DCOL[i]+'">'+k+'</b><input class="inp sh-u grow" placeholder="https://username.github.io/repository/" value="'+esc(SH[i].u)+'"></div><input class="inp sh-s" value="'+esc(SH[i].s)+'"><div class="fbt" style="text-align:left;font-size:17px;min-height:24px"></div>';
   $('#sh').appendChild(d);var u=$('.sh-u',d),s=$('.sh-s',d),fbx=$('.fbt',d);
   function show(){fbx.innerHTML='<span class="bubble" style="display:inline-block;font-size:16px;padding:4px 12px">💬 '+esc(SH[i].s)+'</span>';fbx.style.color=''}if(SH[i].u)show();
   [u,s].forEach(function(inp){inp.addEventListener('keydown',function(e){e.stopPropagation();if(e.key!=='Enter')return;var v=u.value.trim();
-    if(!RE.test(v)){fbx.textContent='🙈 Should look like https://your-name.github.io/my-arcade/';fbx.style.color='#b91c1c';bad();return}
+    if(!validPagesUrl(v)){fbx.textContent='🙈 Use https://username.github.io/repository/';fbx.style.color='#b91c1c';bad();return}
     SH[i]={u:v,s:s.value.trim()||GAME[i].s};store.set('home',SH);d.style.background='#DDFBE7';show();good();burstAt(d);raceFinish('home',i)})});if(SH[i].u)d.style.background='#DDFBE7'});
 $('#sh-copy').onclick=function(){var t='Hi families! Today in AI Project Lab 1 your kids put their games on the internet. Here are their live links:\n\n'+KIDS.map(function(k,i){return k+': '+(SH[i].u||'(link coming)')+'\n"'+SH[i].s+'"'}).join('\n\n')+'\n\nOpen it on any phone, tablet or computer and give it a play!';copyText(t,this)};
 
@@ -1107,7 +1109,7 @@ var QZ=[
  {t:'Quiz 2',q:[
   {q:'What does GitHub Pages do?',o:['Turns a public repo into a website','Writes your game for you','Checks your spelling','Makes your repo private'],a:0,s:20,w:'Pages turns a public repo into a website.'},
   {q:'Where do you turn on GitHub Pages?',o:['Add file, then Upload files','Settings, then Pages','The Codex panel','Your profile picture'],a:1,s:20,w:'Settings, then Pages.'},
-  {q:'What does your game\'s web address look like?',o:['my-arcade.com','localhost/game.html','your-username.github.io/my-arcade','github.com/pages'],a:2,s:20,w:'your-username.github.io/my-arcade'}]},
+  {q:'What does your game\'s web address look like?',o:['my-arcade.com','localhost/game.html','your-username.github.io/your-repo-name','github.com/pages'],a:2,s:20,w:'your-username.github.io/your-repo-name'}]},
  {t:'Quiz 3',q:[
   {q:'True or False: Your live game still loads when your laptop is closed.',o:['True','False'],a:0,s:10,w:'It lives on GitHub now, not on your laptop.'},
   {q:'You uploaded a fix, but the live site still looks old. What do you try first?',o:['Delete the repo','Make the repo private','Wait a few minutes, then refresh','Turn off your computer'],a:2,s:25,w:'Pages needs a minute or two. Wait, then refresh.'},
