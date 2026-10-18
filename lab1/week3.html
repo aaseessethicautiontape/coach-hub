@@ -320,6 +320,11 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
 .prog div{font:600 19px var(--fh);display:flex;gap:8px;align-items:center;color:var(--mute)}
 .prog div.d{color:var(--ink)}.prog div.d::before{content:'✅'}.prog div:not(.d)::before{content:'⬜'}
 .pa-field{display:flex;flex:1 1 280px;flex-direction:column;gap:6px;font:700 18px var(--fh)}.pa-field input{width:100%}
+.pa-preview{width:100%;display:flex;flex-direction:column;gap:10px;padding:12px 16px}
+.pa-url{display:flex;flex-direction:column;gap:4px;text-align:center;font:700 18px var(--fh)}.pa-url a{font:700 18px var(--fm);color:#075985;overflow-wrap:anywhere}
+.pa-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:15px}.pa-tools>span:last-child{display:flex;gap:8px;flex-wrap:wrap}.pa-tools [aria-disabled="true"]{opacity:.55;pointer-events:none}
+.pa-frame-wrap{position:relative;width:100%;height:min(38vh,390px);min-height:220px;border:2px solid var(--ink);border-radius:12px;overflow:hidden;background:#fff}
+.pa-frame-wrap iframe{display:block;width:100%;height:100%;border:0;background:#fff}.pa-empty{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--mute);font:700 19px var(--fh);background:rgba(255,255,255,.95)}.pa-empty.off{display:none}
 .fake{border:3px solid var(--ink);border-radius:14px;overflow:hidden;background:#fff}
 .fake .bar{background:#e5e7eb;padding:6px 12px;font:700 16px var(--fm);color:#374151}
 .fake .pgx{padding:20px;text-align:center;background:linear-gradient(#0b1840,#1e3a8a);color:#fff}
@@ -406,6 +411,7 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
   .touch-controls button{min-width:54px;min-height:54px;padding:6px 12px;font-size:20px}
   .touch-controls .tc-label{flex:1 1 100%;min-width:0;font-size:14px}
   .pg{width:100%;height:auto;aspect-ratio:470/300}
+  .pa-preview{padding:10px}.pa-url{font-size:15px}.pa-url a{font-size:14px}.pa-tools{align-items:flex-start;flex-direction:column;font-size:13px}.pa-frame-wrap{height:38dvh;min-height:200px}.pa-empty{font-size:16px}
   .pipe{flex-direction:column;gap:12px}.node{width:100%;min-height:110px}.arr{transform:rotate(90deg)}
   .qo{grid-template-columns:1fr;gap:8px}.qq{font-size:26px}.opt{min-height:64px;font-size:18px;padding:8px 10px}.opt b{width:36px;height:36px}
   .qh{align-items:flex-start;flex-wrap:wrap}.qx{font-size:16px}
@@ -643,8 +649,12 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
   <header><div class="kicker">Predict it</div><h2>What is your web address? 🔮</h2></header>
   <div class="body">
     <p>A project site address uses <b>both</b> your GitHub username and your repository name. They can be different.</p>
-    <div class="row mid"><label class="pa-field">GitHub username<input class="inp" id="pa-in" placeholder="e.g. alex-codes" autocomplete="off"></label><label class="pa-field">Repository name<input class="inp" id="pa-repo" placeholder="e.g. my-game" autocomplete="off"></label><button class="btn" id="pa-go">🔮 Predict</button></div>
-    <div class="fake"><div class="bar" id="pa-bar">https://username.github.io/repository/</div><div class="pgx"><h3 id="pa-title">🎮 Your project</h3><p class="small">Username goes before <b>.github.io</b>; repository name goes after it.</p></div></div>
+    <div class="row mid"><label class="pa-field">GitHub username<input class="inp" id="pa-in" placeholder="e.g. alex-codes" autocomplete="off"></label><label class="pa-field">Repository name<input class="inp" id="pa-repo" placeholder="e.g. my-game" autocomplete="off"></label><span class="hint">The link and game preview update as you type.</span></div>
+    <div class="pa-preview card">
+      <div class="pa-url"><span>🔗 Your live project URL</span><a id="pa-link" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Enter both names to create your link</a></div>
+      <div class="pa-tools"><span id="pa-status" role="status" aria-live="polite">Your actual GitHub Pages site will appear here.</span><span><a id="pa-open" class="btn sm sky" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Open game ↗</a><button class="btn sm alt" id="pa-reload" type="button" disabled>Reload preview ↻</button></span></div>
+      <div class="pa-frame-wrap"><div class="pa-empty" id="pa-empty">Add your GitHub username and repository name above to preview the real game.</div><iframe id="pa-frame" title="Live GitHub Pages game preview" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock"></iframe></div>
+    </div>
   </div>
 </section>
 
@@ -1085,8 +1095,11 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
   spBoard();code();window.__gp={code:code}})();
 
 /* predict address */
-function predictAddress(){var ui=$('#pa-in'),ri=$('#pa-repo'),u=ui.value.trim().toLowerCase().replace(/[^a-z0-9-]/g,''),r=ri.value.trim().replace(/[^a-zA-Z0-9._-]/g,'').replace(/^\.+|\.+$/g,'');if(!u||!r){toast('Enter both your GitHub username and repo name.');bad();return}ui.value=u;ri.value=r;$('#pa-bar').textContent='https://'+u+'.github.io/'+encodeURIComponent(r)+'/';$('#pa-title').textContent='🎮 '+r;good();burstAt($('#pa-bar'))}
-$('#pa-go').onclick=predictAddress;[$('#pa-in'),$('#pa-repo')].forEach(function(input){input.addEventListener('keydown',function(e){e.stopPropagation();if(e.key==='Enter')predictAddress()})});
+var paTimer=0,paCurrent='';
+function predictAddress(showMessage){var ui=$('#pa-in'),ri=$('#pa-repo'),u=ui.value.trim().toLowerCase().replace(/[^a-z0-9-]/g,''),r=ri.value.trim().replace(/[^a-zA-Z0-9._-]/g,'').replace(/^\.+|\.+$/g,'');var link=$('#pa-link'),open=$('#pa-open'),frame=$('#pa-frame'),empty=$('#pa-empty'),status=$('#pa-status');if(!u||!r){link.textContent='Enter both names to create your link';link.href='#';link.setAttribute('aria-disabled','true');open.href='#';open.setAttribute('aria-disabled','true');$('#pa-reload').disabled=true;empty.classList.remove('off');empty.textContent='Add your GitHub username and repository name above to preview the real game.';status.textContent='Your actual GitHub Pages site will appear here.';paCurrent='';if(showMessage){toast('Enter both your GitHub username and repo name.');bad()}return}var url='https://'+u+'.github.io/'+encodeURIComponent(r)+'/';link.textContent=url;link.href=url;link.removeAttribute('aria-disabled');open.href=url;open.removeAttribute('aria-disabled');$('#pa-reload').disabled=false;empty.classList.remove('off');empty.textContent='Loading the live game preview… If Pages is not enabled, use Open game after deployment.';status.textContent='Loading the live GitHub Pages site…';if(url!==paCurrent){paCurrent=url;clearTimeout(paTimer);paTimer=setTimeout(function(){frame.src=url},350)}if(showMessage){good();burstAt(link)}}
+[$('#pa-in'),$('#pa-repo')].forEach(function(input){input.addEventListener('input',function(){predictAddress(false)});input.addEventListener('keydown',function(e){e.stopPropagation();if(e.key==='Enter')predictAddress(true)})});
+$('#pa-frame').addEventListener('load',function(){if(this.src&&this.src!=='about:blank'){$('#pa-empty').classList.add('off');$('#pa-status').textContent='Page opened. If you see a 404, enable GitHub Pages for this repo. Use Open game ↗ for full size.'}});
+$('#pa-reload').onclick=function(){if(paCurrent){$('#pa-empty').classList.remove('off');$('#pa-empty').textContent='Reloading the live game…';$('#pa-status').textContent='Reloading preview…';$('#pa-frame').src='about:blank';var url=paCurrent;setTimeout(function(){$('#pa-frame').src=url},50)}};
 
 /* send it home */
 var SH=store.get('home',[]);
