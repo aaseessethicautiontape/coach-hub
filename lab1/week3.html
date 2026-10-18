@@ -353,6 +353,69 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
 .touch-controls .tc-label{font:700 16px var(--fh);color:var(--mute);min-width:120px;text-align:center}
 .ld.kid .bk,.ld.kid .ap,.ld.kid .scr{display:none!important}
 #ld-kc{font-size:17px;font-weight:800;color:var(--ink);background:#fff;border:3px solid var(--ink);border-radius:999px;padding:4px 14px;box-shadow:0 3px 0 var(--ink)}
+
+@media (max-width:900px) and (max-height:600px), (max-width:800px) and (orientation:portrait){
+  html,body{height:100%;overflow:hidden;overscroll-behavior:none;-webkit-text-size-adjust:100%}
+  #viewport{inset:0;overflow:hidden}
+  #stage{position:absolute;left:0;top:0;width:100vw;height:100dvh;transform:none!important;overflow:hidden;background:var(--bg)}
+  #top{height:52px;padding:0 12px;gap:8px}
+  #top .tag{font-size:14px;padding:4px 10px;border-width:2px}
+  #top .tag.r{display:none}
+  #sb{max-width:70vw;overflow-x:auto;white-space:nowrap;gap:8px;font-size:13px}
+  .slide{inset:0;padding:66px 16px 84px;gap:10px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  .slide>header{flex:none}
+  .slide>header .hrow{align-items:flex-start;flex-wrap:wrap;gap:8px}
+  .body{width:100%;flex:none;justify-content:flex-start;gap:12px;min-height:0}
+  .row{flex-wrap:wrap;gap:10px!important}
+  .row>.grow,.col.grow{flex:1 1 100%;min-width:0}
+  .col[style*="width:"],.card[style*="width:"],.row [style*="width:"]{width:auto!important;max-width:100%}
+  h1{font-size:clamp(38px,12vw,56px);line-height:1.05}
+  h2{font-size:clamp(27px,8vw,36px);line-height:1.12}
+  h3{font-size:22px}
+  p,li{font-size:18px;line-height:1.35}
+  .sub{font-size:21px}.small{font-size:17px}.hint{font-size:15px}.kicker{font-size:15px}
+  .card{border-width:2px;border-radius:16px;padding:12px 14px;box-shadow:0 4px 0 var(--ink)}
+  .steps{padding-left:0}.steps li{font-size:18px;padding-left:46px;min-height:38px}.steps li::before{width:34px;height:34px;font-size:18px;margin-top:-18px}
+  .btn,.ktab,.ch,.chip,.rb,.gc,.tst button,.nav button{min-height:48px;touch-action:manipulation}
+  .btn{font-size:18px;padding:8px 14px;white-space:normal}.btn.sm{font-size:16px}
+  .ktab{font-size:15px;padding:7px 9px}.chips,.row{align-items:stretch}
+  input,select,.inp{font-size:16px!important;min-height:46px}
+  .prompt{flex-wrap:wrap;padding:10px 12px}.prompt code{font-size:15px;overflow-wrap:anywhere}.prompt .btn{flex:none}
+  .code{font-size:13px;overflow-x:auto}.code .ln{white-space:pre}
+  .grid{grid-template-columns:minmax(0,1fr) repeat(3,minmax(38px,58px))!important;gap:6px!important}
+  .gh{font-size:13px;overflow-wrap:anywhere}.gl{font-size:14px;padding:6px;min-height:44px}.gc{min-height:48px;font-size:22px}
+  .gal{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.gal>div{padding:6px}.gal .e{font-size:28px}.gal b{font-size:15px}
+  .checkin{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .ci{width:auto;font-size:18px;padding:8px}.ci .gm{font-size:13px}
+  #journey{display:none}
+  #bar{height:68px;padding:6px 10px;justify-content:center;background:rgba(255,248,251,.96);border-top:2px solid var(--ink)}
+  #left{min-width:0;position:absolute;left:8px;bottom:72px}
+  .nav{min-width:0;width:100%;gap:8px;justify-content:center;font-size:15px}
+  .nav button{width:48px;height:48px;border-radius:14px;font-size:19px}
+  #mode{height:44px!important;font-size:12px!important;padding:4px 8px!important}
+  #fsb.on{width:44px;height:44px;display:flex;align-items:center;justify-content:center}
+  .ov{padding:16px}.ov .card{width:min(100%,440px);max-height:85dvh;overflow:auto}.ov h3{font-size:22px}
+  #start .card{padding:20px}
+  .float{display:none}
+  .ld{width:100%;height:auto;aspect-ratio:560/330;flex:none}
+  .ld .ldc{width:100%;height:100%}
+  .touch-controls{width:100%;gap:8px;flex-wrap:wrap;margin-top:6px}
+  .touch-controls.on{display:flex}
+  .tc-pad{display:flex;justify-content:center;gap:8px;width:100%}
+  .touch-controls button{min-width:54px;min-height:54px;padding:6px 12px;font-size:20px}
+  .touch-controls .tc-label{flex:1 1 100%;min-width:0;font-size:14px}
+  .pg{width:100%;height:auto;aspect-ratio:470/300}
+  .pipe{flex-direction:column;gap:12px}.node{width:100%;min-height:110px}.arr{transform:rotate(90deg)}
+  .qo{grid-template-columns:1fr;gap:8px}.qq{font-size:26px}.opt{min-height:64px;font-size:18px;padding:8px 10px}.opt b{width:36px;height:36px}
+  .qh{align-items:flex-start;flex-wrap:wrap}.qx{font-size:16px}
+  #sh{grid-template-columns:1fr!important}
+  .vs{grid-template-columns:1fr;grid-template-rows:38px auto auto auto;height:auto}.vs .tb{grid-column:1}.vs .pane{min-height:100px}
+  .ghw .ghc{padding:10px}.ghw .ghset{grid-template-columns:100px 1fr}.ghw .ghmain{padding:8px;font-size:15px}
+  .pod{height:210px;gap:8px}.pod .pc{width:30%;gap:4px}.pod .bar{font-size:28px;padding-top:6px}.pod .pc>div:nth-child(1){font-size:30px!important;height:38px!important}
+  .feel{gap:5px}.feel button{width:42px!important;height:42px!important;font-size:22px!important}
+  .race{gap:6px;padding:6px}.rb{font-size:14px;padding:5px 8px}.team{font-size:18px}
+  .bonus-badge{top:62px;right:16px;font-size:14px}
+}
 </style>
 </head>
 <body>
@@ -806,8 +869,8 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
     /* ===== each kid's own mini game, same 3 switches ===== */
   var cur=-1,cv2=document.createElement('canvas');cv2.width=560;cv2.height=330;cv2.className='ldc';ld.appendChild(cv2);
   var X=cv2.getContext('2d'),kraf=0,klast=0,KK={},FH="'Fredoka',sans-serif",TNR="'Times New Roman',serif";
-  var touch=document.createElement('div');touch.className='touch-controls';touch.setAttribute('aria-label','Touch game controls');touch.innerHTML='<button type="button" data-key="a" aria-label="Move left">◀</button><button type="button" data-key="w" aria-label="Move up">▲</button><button type="button" data-key="s" aria-label="Move down">▼</button><button type="button" data-key="d" aria-label="Move right">▶</button><span class="tc-label"></span>';ld.parentNode.insertBefore(touch,ld.nextSibling);
-  $$('.touch-controls button',touch).forEach(function(btn){function press(e){e.preventDefault();var key=btn.dataset.key,g=KG[cur];if(!on.h||!on.j||!g)return;btn.classList.add('pressed');if(cur===2){if(g.key)g.key(key)}else{KK[key]=true}}function release(e){if(e)e.preventDefault();btn.classList.remove('pressed');KK[btn.dataset.key]=false}btn.addEventListener('pointerdown',function(e){if(btn.setPointerCapture)btn.setPointerCapture(e.pointerId);press(e)});['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){btn.addEventListener(ev,release)})});
+  var touch=document.createElement('div');touch.className='touch-controls';touch.setAttribute('aria-label','Touch game controls');touch.innerHTML='<div class="tc-pad"><button type="button" data-key="a" aria-label="Move left">◀</button><button type="button" data-key="w" aria-label="Move up or act">▲</button><button type="button" data-key="s" aria-label="Move down">▼</button><button type="button" data-key="d" aria-label="Move right">▶</button></div><span class="tc-label"></span>'; ld.parentNode.insertBefore(touch,ld.nextSibling);
+  $$('.touch-controls button',touch).forEach(function(btn){function press(e){e.preventDefault();var key=btn.dataset.key,g=KG[cur];if(!on.h||!on.j||!g)return;btn.classList.add('pressed');if(cur===1&&g.mode()==='inv'){KK[key]=true;return}if(g.key)g.key(key)}function release(e){if(e)e.preventDefault();btn.classList.remove('pressed');KK[btn.dataset.key]=false}btn.addEventListener('pointerdown',function(e){if(btn.setPointerCapture)btn.setPointerCapture(e.pointerId);press(e)});['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){btn.addEventListener(ev,release)})});
   function rnd(a){return a[Math.floor(Math.random()*a.length)]}
   function txt(s,x,y,sz,col,font,al){X.font=sz+'px '+(font||FH);X.fillStyle=col||'#000';X.textAlign=al||'left';X.textBaseline='middle';X.fillText(s,x,y)}
   function emo(e,x,y,sz,flip,rot){X.save();X.font=sz+'px sans-serif';X.textAlign='center';X.textBaseline='middle';X.translate(x,y);if(rot)X.rotate(rot);if(flip)X.scale(-1,1);X.fillText(e,0,0);X.restore()}
@@ -928,12 +991,13 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
 
   var KG=[TD,AR,SN,DN];
   function kdraw(){X.clearRect(0,0,560,330);if(cur<0||!on.h)return;KG[cur].draw(on.c)}
-  function kstep(t){kraf=0;if(cur<0||!$('#s-layers').classList.contains('active'))return;var dt=Math.min(.05,(t-(klast||t))/1000);klast=t;if(on.h&&on.j)KG[cur].update(dt);kdraw();kraf=requestAnimationFrame(kstep)}
+  function kstep(t){kraf=0;if(cur<0||!$('#s-layers').classList.contains('active'))return;var dt=Math.min(.05,(t-(klast||t))/1000);klast=t;touchMode();if(on.h&&on.j)KG[cur].update(dt);kdraw();kraf=requestAnimationFrame(kstep)}
   function kgo(){cv2.style.display=cur>=0&&on.h?'block':'none';kdraw();if(!kraf&&cur>=0){klast=0;kraf=requestAnimationFrame(kstep)}}
-  function setGame(i){cur=i;ld.classList.toggle('kid',i>=0);KK={};if(i>=0)KG[i].reset();touch.classList.toggle('on',i===2);$('.tc-label',touch).textContent='Tap arrows to steer';$$('.touch-controls button',touch).forEach(function(b){b.style.display=''});$('#ld-appc').style.display=i<0?'':'none';$('#ld-board').style.display=i<0?'':'none';var kc=$('#ld-kc');kc.style.display=i<0?'none':'';if(i>=0)kc.textContent=KG[i].ctl;cv2.style.cursor=i===2?'default':'pointer';msg();kgo();go()}
-  cv2.addEventListener('pointerdown',function(e){if(cur<0||!on.h)return;if(!on.j){bad();toast('😴 Asleep! Turn on JavaScript.');return}var r=cv2.getBoundingClientRect(),x=(e.clientX-r.left)*560/r.width,y=(e.clientY-r.top)*330/r.height;if(cur===1&&KG[cur].mode()==='inv'){KK[x<280?'a':'d']=true;cv2.setPointerCapture(e.pointerId)}else if(cur===2){var dx=e.clientX-r.left,dy=e.clientY-r.top;if(Math.max(Math.abs(dx),Math.abs(dy))>18){var k=Math.abs(dx)>Math.abs(dy)?(dx<r.width/2?'a':'d'):(dy<r.height/2?'w':'s');if(KG[cur].key)KG[cur].key(k)}}if(KG[cur].click)KG[cur].click(x,y)},{passive:false});
-  cv2.addEventListener('pointermove',function(e){if(cur!==1||!e.buttons||KG[cur].mode()!=='inv')return;var r=cv2.getBoundingClientRect();KK.a=e.clientX<r.left+r.width/2;KK.d=!KK.a});
-  ['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){cv2.addEventListener(ev,function(){KK.a=false;KK.d=false})});
+  function touchMode(){var mode=cur===1?KG[cur].mode():'';var ready=on.h&&on.j,show=ready&&(cur===2||cur===3||(cur===1&&mode!=='menu'));touch.classList.toggle('on',show);var label=!ready?'Turn on HTML and JavaScript to play':cur===2?'Tap arrows to steer':cur===3?'Tap JUMP or the game to jump':mode==='flappy'?'Tap FLAP or the game to flap':mode==='race'?'Tap left or right to change lanes':mode==='inv'?'Hold left or right to move · auto fire':'';$('.tc-label',touch).textContent=label;$$('.touch-controls button',touch).forEach(function(b){var k=b.dataset.key,visible=cur===2||(cur===1&&mode==='race'&&(k==='a'||k==='d'))||(cur===1&&mode==='inv'&&(k==='a'||k==='d'))||((cur===3||cur===1&&mode==='flappy')&&k==='w');b.style.display=visible?'':'none';if(cur===3&&k==='w')b.textContent='JUMP';else if(cur===1&&mode==='flappy'&&k==='w')b.textContent='FLAP';else b.textContent={a:'◀',w:'▲',s:'▼',d:'▶'}[k]})}
+  function setGame(i){cur=i;ld.classList.toggle('kid',i>=0);KK={};if(i>=0)KG[i].reset();touchMode();$('#ld-appc').style.display=i<0?'':'none';$('#ld-board').style.display=i<0?'':'none';var kc=$('#ld-kc');kc.style.display=i<0?'none':'';if(i>=0)kc.textContent=KG[i].ctl;cv2.style.cursor=i===2?'default':'pointer';msg();kgo();go()}
+  var swipe=null;cv2.addEventListener('pointerdown',function(e){if(cur<0||!on.h)return;if(!on.j){bad();toast('😴 Asleep! Turn on JavaScript.');return}var r=cv2.getBoundingClientRect(),x=(e.clientX-r.left)*560/r.width,y=(e.clientY-r.top)*330/r.height;if(cur===1&&KG[cur].mode()==='inv'){KK[x<280?'a':'d']=true;cv2.setPointerCapture(e.pointerId)}else if(cur===2){swipe={x:e.clientX,y:e.clientY}}if(KG[cur].click)KG[cur].click(x,y)},{passive:false});
+  cv2.addEventListener('pointermove',function(e){if(cur===1&&e.buttons&&KG[cur].mode()==='inv'){var r=cv2.getBoundingClientRect();KK.a=e.clientX<r.left+r.width/2;KK.d=!KK.a;return}if(cur!==2||!swipe)return;var dx=e.clientX-swipe.x,dy=e.clientY-swipe.y;if(Math.max(Math.abs(dx),Math.abs(dy))<24)return;var k=Math.abs(dx)>Math.abs(dy)?(dx<0?'a':'d'):(dy<0?'w':'s');if(KG[cur].key)KG[cur].key(k);swipe=null});
+  ['pointerup','pointercancel','lostpointercapture'].forEach(function(ev){cv2.addEventListener(ev,function(){KK.a=false;KK.d=false;swipe=null})});
   document.addEventListener('keydown',function(e){if(cur<0||!$('#s-layers').classList.contains('active'))return;var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'))return;var k=e.key===' '?' ':String(e.key).toLowerCase(),g=KG[cur];if(!g.keys||g.keys.indexOf(k)<0)return;
     e.preventDefault();e.stopImmediatePropagation();if(!on.h)return;if(!on.j){if(!e.repeat){bad();toast('😴 Asleep! Turn on JavaScript.')}return}KK[k]=true;if(g.key&&!e.repeat)g.key(k)},true);
   document.addEventListener('keyup',function(e){var k=e.key===' '?' ':String(e.key).toLowerCase();KK[k]=false},true);
