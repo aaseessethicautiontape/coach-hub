@@ -6,9 +6,9 @@ Aasees Sethi's class hub for AI Project Lab 1 and Lab 3 at Caution Tape (Newmark
 - `lab1/`, `lab3/` hold the weekly slide decks (one HTML file each, works offline)
 - `guides/` holds the teacher guide PDFs
 
-The dashboard and Lab 1 Week 1 deck are open. Lab 3 Week 1 is password
-protected; both Week 2 decks are open. Teacher guide PDFs, including the Lab 1
-Week 2 guide, use their own PDF passwords. Keep the individual passwords
-separately from this folder.
+The dashboard and weekly slide decks are open. Teacher guide PDFs use PDF
+password protection; keep individual passwords separately from this folder.
+The new Week 3 guides use the `LABXWeekX181026` pattern, with the lab and week
+numbers substituted for `X`.
 
 Static site, no build step. Deploy with `npx vercel` from this folder.
