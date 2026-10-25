@@ -724,7 +724,7 @@ html,body{background-color:#F5FBFF;background-image:radial-gradient(#bae6fd 2px,
     </div>
     <div class="row" style="align-items:stretch">
       <div class="card grow"><h3 style="margin-bottom:8px">How did today feel?</h3><div id="feel" style="display:grid;grid-template-columns:1fr 1fr;gap:8px 18px"></div></div>
-      <div class="card mint step" style="width:400px"><h3>🔜 Week 4: Second Game!</h3><p class="small">A second game, a menu and a high score. Bring your live address and a 3-sentence idea for a small second game.</p></div>
+      <div class="card mint step" style="width:400px"><h3>🔜 Week 4: Second Game!</h3><p class="small">Ian has already made Cat Run, a runner like Dino Run! Bring your live address and a 3-sentence idea for your next game.</p></div>
     </div>
   </div>
 </section>
@@ -823,7 +823,7 @@ document.addEventListener('click',function(e){var b=e.target.closest('.copy');if
 var GAME=[
  {e:'🏰',n:'Tower Defence',h:'A tower and a path exist',c:'Towers are blue, enemies are red',j:'When an enemy gets close, the tower shoots',t:['Place a tower. Does it shoot?','Do the enemies come in waves?','Can you lose lives, or win after the last wave?'],fa:'an enemy reaches the end of the path',fb:'the lives counter (down by 1)',end:'🏁 Ending idea: lose when lives hit 0, win after the last wave.',ph:'In game.html, make the towers and buttons big enough to tap on a phone. Keep everything else the same.',s:'I built a tower defence game. It is live.'},
  {e:'🕹️',n:'Arcade',h:'A menu with a button for each game',c:'Neon buttons on a dark screen',j:'When you click Flappy Bird, that game starts',t:['Does every game in the menu open?','Can you get back to the menu?','Does each game end and show a score?'],fa:'I crash in the racing game',fb:'the screen (back to the arcade menu)',end:'🏁 Ending idea: every game ends, shows your score, and goes back to the menu.',ph:'In game.html, add big on-screen buttons so every game in my arcade can be played on a phone. Keep everything else the same.',s:'I built an arcade with lots of games. It is live.'},
- {e:'🐍',n:'Snake Battle',h:'Your snake and the bot snakes',c:'Your snake is green, bots are other colours',j:'When you eat a smaller snake, you grow',t:['Do the bot snakes move by themselves?','Does your snake grow when it eats?','Does a bigger snake eat you?'],fa:'my snake touches a smaller snake',fb:'my snake\'s length (it grows)',end:'🏁 Ending idea: lose when a bigger snake eats you, win when you are the biggest.',ph:'In game.html, add 4 big arrow buttons so my snake can be steered on a phone. Keep everything else the same.',s:'I built a snake battle game. It is live.'},
+ {e:'🐈',n:'Cat Run',h:'A cat, obstacles and a score',c:'A cat runs through a bright, simple world',j:'When you press space, the cat jumps',t:['Does space make the cat jump?','Does hitting an obstacle end the game?','Does the score go up as the cat runs?'],fa:'the cat hits an obstacle',fb:'the screen (show Game Over)',end:'🏁 Ending idea: lose when you hit an obstacle, then show your score and high score.',ph:'In game.html, make the cat jump when I tap the screen, so it works on a phone. Keep everything else the same.',s:'I built Cat Run, a runner game like Dino Run. It is live.'},
  {e:'🦖',n:'Dino Run',h:'A dino, cactuses and a score',c:'A grey dino in a white desert',j:'When you press space, the dino jumps',t:['Does space make the dino jump?','Does hitting a cactus end the game?','Does the score go up as you run?'],fa:'the dino hits a cactus',fb:'the screen (show Game Over)',end:'🏁 Ending idea: lose when you hit a cactus, then show your score and high score.',ph:'In game.html, make the dino jump when I tap the screen, so it works on a phone. Keep everything else the same.',s:'I built a dino runner game. It is live.'}];
 function kidTabs(el,onPick,extra,items){items=items||KIDS.map(function(k,i){return {label:GAME[i].e+' '+k,index:i}});var html=(extra?'<button class="ktab" data-k="-1">'+extra+'</button>':'')+items.map(function(item){return '<button class="ktab" data-k="'+item.index+'">'+item.label+'</button>'}).join('');el.innerHTML=html;
   $$('.ktab',el).forEach(function(b){b.onclick=function(){$$('.ktab',el).forEach(function(x){x.classList.toggle('sel',x===b)});tone(620,.08);onPick(+b.dataset.k)}})}
@@ -984,6 +984,21 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
         if(s.end)over(s.end,(st?'C':'c')+'lick to play again',st)},
       click:function(){if(s.end)reset()}}})();
 
+  /* Ian's Cat Run touch demo, built on the Dino Run jump-and-obstacle pattern */
+  var CN=(function(){var G=270,s,hi=0;
+    function reset(){s={y:0,vy:0,cac:[{x:330,w:24,h:36},{x:520,w:22,h:30}],t:1.2,spd:260,sc:0,end:false,cl:[{x:120,y:60},{x:400,y:95}]}}reset();
+    function jump(){if(s.end){reset();return}if(s.y===0){s.vy=560;tone(600,.05)}}
+    return {reset:reset,ctl:'Space/W or tap JUMP/the game to jump',keys:[' ','w'],key:function(){jump()},click:function(){jump()},
+      update:function(dt){if(s.end)return;s.vy-=1600*dt;s.y=Math.max(0,s.y+s.vy*dt);if(s.y===0&&s.vy<0)s.vy=0;s.spd+=6*dt;s.sc+=dt*10;
+        s.t-=dt;if(s.t<=0){s.cac.push({x:580,w:18+Math.random()*12,h:28+Math.random()*20});s.t=.9+Math.random()*.9}
+        s.cac.forEach(function(c){c.x-=s.spd*dt});s.cac=s.cac.filter(function(c){return c.x>-40});s.cl.forEach(function(c){c.x-=30*dt;if(c.x<-60)c.x=600});
+        var dx=70,dw=38,dh=40,dy=G-dh-s.y;s.cac.forEach(function(c){if(!s.end&&dx+dw-6>c.x&&dx+6<c.x+c.w&&dy+dh-4>G-c.h){s.end=true;hi=Math.max(hi,Math.floor(s.sc));bad()}})},
+      draw:function(st){var score=('0000'+Math.floor(s.sc)).slice(-5),hs=('0000'+hi).slice(-5);
+        if(st){X.fillStyle='#fefce8';X.fillRect(0,0,560,330);s.cl.forEach(function(c){emo('☁️',c.x,c.y,30)});X.strokeStyle='#a16207';X.lineWidth=2;X.beginPath();X.moveTo(0,G+1);X.lineTo(560,G+1);X.stroke();
+          s.cac.forEach(function(c){emo('🧶',c.x+c.w/2,G-c.h/2,c.h)});emo('🐈',88,G-22-s.y,46,true);txt('HI '+hs+'   '+score,548,20,18,'#713f12',FH,'right')}
+        else{plainBg();X.strokeStyle='#000';X.lineWidth=1;X.beginPath();X.moveTo(0,G+.5);X.lineTo(560,G+.5);X.stroke();s.cac.forEach(function(c){box(c.x,G-c.h,c.w,c.h,'')});if(s.cac[0])txt('yarn',s.cac[0].x+s.cac[0].w/2,G-s.cac[0].h-10,12,'#000',TNR,'center');box(70,G-40-s.y,38,40,'cat');txt('Score: '+Math.floor(s.sc)+'   High: '+hi,10,16,14,'#000',TNR)}
+        if(s.end)over('GAME OVER','Score '+Math.floor(s.sc)+'  ·  High '+hi+'  ·  '+(st?'Space to try again':'space to try again'),st)}}})();
+
   /* Dino Run touch demo */
   var DN=(function(){var G=270,s,hi=0;
     function reset(){s={y:0,vy:0,cac:[{x:330,w:20,h:40},{x:520,w:26,h:32}],t:1.2,spd:260,sc:0,end:false,cl:[{x:120,y:60},{x:400,y:95}]}}reset();
@@ -1000,7 +1015,7 @@ function dots(el,n,done){var h='';for(var i=0;i<n;i++)h+='<span class="'+(i<done
         else{plainBg();X.strokeStyle='#000';X.lineWidth=1;X.beginPath();X.moveTo(0,G+.5);X.lineTo(560,G+.5);X.stroke();s.cac.forEach(function(c){box(c.x,G-c.h,c.w,c.h,'')});if(s.cac[0])txt('cactus',s.cac[0].x+s.cac[0].w/2,G-s.cac[0].h-10,12,'#000',TNR,'center');box(70,G-40-s.y,34,40,'dino');txt('Score: '+Math.floor(s.sc)+'   High: '+hi,10,16,14,'#000',TNR)}
         if(s.end)over('GAME OVER','Score '+Math.floor(s.sc)+'  ·  High '+hi+'  ·  '+(st?'Space to try again':'space to try again'),st)}}})();
 
-  var KG=[TD,AR,SN,DN];
+  var KG=[TD,AR,CN,DN];
   function kdraw(){X.clearRect(0,0,560,330);if(cur<0||!on.h)return;KG[cur].draw(on.c)}
   function kstep(t){kraf=0;if(cur<0||!$('#s-layers').classList.contains('active'))return;var dt=Math.min(.05,(t-(klast||t))/1000);klast=t;touchMode();if(on.h&&on.j)KG[cur].update(dt);kdraw();kraf=requestAnimationFrame(kstep)}
   function kgo(){cv2.style.display=cur>=0&&on.h?'block':'none';kdraw();if(!kraf&&cur>=0){klast=0;kraf=requestAnimationFrame(kstep)}}

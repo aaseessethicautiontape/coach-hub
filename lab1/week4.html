@@ -423,7 +423,7 @@ h2 em{color:var(--pink-d)}
       <li>Right-click <span class="inl">game2.html</span>, then <b>Open with Live Server</b></li>
       <li>Play it <b>two times</b>. Write yes or no next to each PRD sentence.</li>
     </ol>
-    <div class="tip" style="padding:8px 16px">⚽⛏️ <b>Francis + Lucas:</b> already built your game two? Save it as <span class="inl">game2.html</span> in <span class="inl">my-arcade</span> and check it against your prd2.md.</div>
+    <div class="tip" style="padding:8px 16px">⚽⛏️🐈 <b>Francis, Lucas + Ian:</b> already built your game two? Save it as <span class="inl">game2.html</span> in <span class="inl">my-arcade</span> and check it against your prd2.md.</div>
     <div class="race" data-race="g2" data-goal="game2.html plays"></div>
   </div>
 </section>
@@ -591,7 +591,7 @@ var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){ret
 var PFX='l1w4_';
 var store={get:function(k,d){try{var v=localStorage.getItem(PFX+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set:function(k,v){try{localStorage.setItem(PFX+k,JSON.stringify(v))}catch(e){}}};
 var KIDS=['Francis','Lucas','Ian'],COL=['#F472B6','#22D3EE','#A3E635'],DCOL=['#DB2777','#0E7490','#4D7C0F'];
-var GAME=[{e1:'🏰',g1:'Tower Defence',e2:'⚽',g2:'Ball Bash'},{e1:'🕹️',g1:'Arcade',e2:'⛏️',g2:'Block Survival'},{e1:'🐍',g1:'Snake Battle 2.0',e2:'❓',g2:'Game two: today!'}];
+var GAME=[{e1:'🏰',g1:'Tower Defence',e2:'⚽',g2:'Ball Bash'},{e1:'🕹️',g1:'Arcade',e2:'⛏️',g2:'Block Survival'},{e1:'🐍',g1:'Snake Battle 2.0',e2:'🐈',g2:'Cat Run'}];
 function zeros(v){return KIDS.map(function(){return v})}
 function padArr(a,v){a=Array.isArray(a)?a:[];while(a.length<KIDS.length)a.push(v);return a}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -681,7 +681,7 @@ $$('#g-done .gl').forEach(function(x){x.style.fontSize='18px'});
 /* PRD two builder */
 (function(){var EX=[['Two players on one keyboard.','Each player moves a ball (WASD and the arrow keys) and bumps the other ball.','If your ball gets knocked off the edge, the other player scores. First to 3 wins.'],
   ['One player.','A player walks with the arrow keys, collects wood, stone and fish, and crafts tools with C.','You lose if your health hits 0 at night. Survive 3 nights to win.'],
-  ['One player.','A snake turns with one key (space) and eats apples.','Eat 20 apples before the timer ends to win; hit a wall and you lose.']];
+  ['One player.','A cat runs by itself and jumps over obstacles when you press space.','The score goes up as you run. Hit an obstacle and it is game over.']];
   var cur=-1,PR=store.get('prd',{});
   function draw(){var a=$('#pr-a').value.trim(),b=$('#pr-b').value.trim(),c=$('#pr-c').value.trim();
     $('#pr-out').textContent='# PRD two'+(cur>=0?': '+GAME[cur].g2:'')+'\n\n'+(a||'Who plays?')+'\n'+(b||'What moves, which keys?')+'\n'+(c||'When does it end?');
@@ -689,7 +689,7 @@ $$('#g-done .gl').forEach(function(x){x.style.fontSize='18px'});
     if(!a&&!b&&!c){s.textContent='';}else if(ands>=4){s.textContent='🐘 Big! Already built? Fine. New? Shrink it.';s.style.color='#C2410C'}else{s.textContent='✅ Nice and small: one key, one goal';s.style.color='#15803d'}
     if(cur>=0){PR[cur]=[a,b,c];store.set('prd',PR)}}
   kidTabs($('#pr-tabs'),function(i){cur=i;var v=PR[i]||EX[i];$('#pr-a').value=v[0];$('#pr-b').value=v[1];$('#pr-c').value=v[2];
-    $('#pr-tip').innerHTML=i===2?'🐍 <b>Ian:</b> this is just an idea. Change it to your own game two! Keep it small.':i===1?'⛏️ <b>Lucas:</b> your game is big. Describe what it does <b>now</b> in 3 sentences.':'⚽ <b>Francis:</b> describe your Ball Bash in 3 sentences.';draw()});
+    $('#pr-tip').innerHTML=i===2?'🐈 <b>Ian:</b> describe your Cat Run in 3 sentences.':i===1?'⛏️ <b>Lucas:</b> your game is big. Describe what it does <b>now</b> in 3 sentences.':'⚽ <b>Francis:</b> describe your Ball Bash in 3 sentences.';draw()});
   $$('.pr-in').forEach(function(x){x.addEventListener('input',draw);x.addEventListener('keydown',function(e){e.stopPropagation()})});
   $('#pr-copy').onclick=function(){copyText($('#pr-out').textContent,this)};draw()})();
 
